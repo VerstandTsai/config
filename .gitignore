@@ -1,0 +1,12 @@
+*
+!.gitignore
+!nvim
+!nvim/*
+!hypr
+!hypr/*
+!eww
+!eww/*
+!dunst
+!dunst/*
+!starship.toml
+
