@@ -212,7 +212,7 @@
 (defwindow bar
     :monitor 0
     :geometry (geometry
-        :x "24px"
+        :x "32px"
         :y 0
         :height "95%"
         :width "48px"
