@@ -25,7 +25,7 @@ $line_break\
 [time]
 disabled = false
 style = 'bold bg:teal fg:base'
-format = '[  $time ]($style)'
+format = '[  $time ]($style)'
 time_format = '%R'
 
 [git_branch]
