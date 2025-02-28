@@ -6,7 +6,7 @@
 palette = "catppuccin_macchiato"
 
 format = """
-┏━\
+╭─\
 [](blue)\
 $os\
 $username\
@@ -19,7 +19,7 @@ $git_status\
 $time\
 [ ](fg:teal)\
 $line_break\
-┗$character"""
+╰─$character"""
 
 # Starship modules
 [time]
@@ -56,8 +56,8 @@ disabled = false
 show_always = true
 
 [character]
-success_symbol = '[->](bold green)'
-error_symbol = '[->](bold red)'
+success_symbol = '[󰁕](green)'
+error_symbol = '[󰁕](red)'
 
 # Palette definitions
 [palettes.catppuccin_latte]
