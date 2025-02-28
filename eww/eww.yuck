@@ -61,7 +61,7 @@
         :cursor "pointer"
         (systray
             :orientation "v"
-            :icon-size 28
+            :icon-size 26
             :spacing 12
         )
     )
@@ -153,6 +153,7 @@
 (defvar clockicon "")
 (defwidget time []
     (box
+        :class "time"
         :orientation "v"
         :space-evenly false
         (box
@@ -160,7 +161,7 @@
             {substring(clockicon, formattime(EWW_TIME, "%I"), 1)}
         )
         (box
-            :class "time"
+            :class "digits"
             :orientation "v"
             (box {formattime(EWW_TIME, "%H")})
             (box {formattime(EWW_TIME, "%M")})
@@ -211,9 +212,9 @@
 (defwindow bar
     :monitor 0
     :geometry (geometry
-        :x "16px"
+        :x "24px"
         :y 0
-        :height "90%"
+        :height "95%"
         :width "48px"
         :anchor "left center"
     )
