@@ -150,12 +150,21 @@
     )
 )
 
+(defvar clockicon "")
 (defwidget time []
     (box
-        :class "time"
         :orientation "v"
-        (box "${formattime(EWW_TIME, "%H")}")
-        (box "${formattime(EWW_TIME, "%M")}")
+        :space-evenly false
+        (box
+            :class "clockicon"
+            {substring(clockicon, formattime(EWW_TIME, "%I"), 1)}
+        )
+        (box
+            :class "time"
+            :orientation "v"
+            (box {formattime(EWW_TIME, "%H")})
+            (box {formattime(EWW_TIME, "%M")})
+        )
     )
 )
 

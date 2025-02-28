@@ -14,7 +14,7 @@
 }
 
 .bottom > * {
-  margin-top: 8px;
+  margin-top: 2px;
 }
 
 .archlinux {
@@ -91,6 +91,11 @@
 .battery {
   margin-left: 2px;
   color: $green;
+}
+
+.clockicon {
+  color: $text;
+  margin-right: 2px;
 }
 
 .time {
