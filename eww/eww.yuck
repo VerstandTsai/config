@@ -150,7 +150,7 @@
     )
 )
 
-(defvar clockicon "")
+(defvar clockicon " ")
 (defwidget time []
     (box
         :class "time"
