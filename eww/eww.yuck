@@ -98,7 +98,12 @@
 
 (defpoll vol
     :interval "0.1s"
-    `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $NF}'`
+    `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'`
+)
+
+(defpoll muted
+    :interval "0.1s"
+    `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}'`
 )
 
 (defwidget volume []
@@ -125,7 +130,7 @@
                 (box
                     :class "volicon"
                     {
-                        vol == "[MUTED]" ? "󰖁" :
+                        muted == "[MUTED]" ? "󰖁" :
                         vol > 0.5 ? "󰕾" :
                         vol > 0   ? "󰖀" : "󰕿"
                     }
