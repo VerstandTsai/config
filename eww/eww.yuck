@@ -3,6 +3,7 @@
         :class "poweroff"
         :onclick "poweroff"
         :cursor "pointer"
+        :tooltip "關機"
         ""
     )
 )
@@ -12,6 +13,7 @@
         :class "reboot"
         :onclick "reboot"
         :cursor "pointer"
+        :tooltip "重新開機"
         ""
     )
 )
@@ -21,6 +23,7 @@
         :class "logout"
         :onclick "hyprctl dispatch exit"
         :cursor "pointer"
+        :tooltip "登出"
         ""
     )
 )
@@ -108,7 +111,7 @@
 
 (defwidget volume []
     (tooltip
-        "Volume: ${round(vol * 100, 0)}%"
+        "音量：${round(vol * 100, 0)}%"
         (box
             :class "volume"
             :orientation "v"
@@ -146,7 +149,7 @@
 (defwidget battery []
     (box
         :class "battery"
-        :tooltip "Battery: ${EWW_BATTERY['BAT1']['capacity']}%"
+        :tooltip "剩餘電量：${EWW_BATTERY['BAT1']['capacity']}%"
         {
             EWW_BATTERY["BAT1"]["status"] == "Charging" ?
                 substring(baticon_charging, round(EWW_BATTERY["BAT1"]["capacity"] / 10, 0), 1) :
@@ -161,6 +164,7 @@
         :class "time"
         :orientation "v"
         :space-evenly false
+        :tooltip {formattime(EWW_TIME, "%Y 年 %-m 月 %-d 日 %-H 時 %-M 分")}
         (box
             :class "clockicon"
             {substring(clockicon, formattime(EWW_TIME, "%I"), 1)}
