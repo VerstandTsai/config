@@ -5,36 +5,6 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- empty setup using defaults
-require("nvim-tree").setup()
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-      require("nvim-tree.api").tree.open()
-    end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    nested = true,
-    callback = function()
-        if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-            vim.cmd "quit"
-        end
-    end
-})
-
--- nvim-treesitter highlighting
-require'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true,
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-    },
-}
-
 -- Catppuccin theme
 require("catppuccin").setup({
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
@@ -54,8 +24,43 @@ require("catppuccin").setup({
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
 
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+      require("nvim-tree.api").tree.open()
+    end
+})
+
+--vim.api.nvim_create_autocmd("BufEnter", {
+--    nested = true,
+--    callback = function()
+--        if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+--            vim.cmd "quit"
+--        end
+--    end
+--})
+
+-- nvim-treesitter highlighting
+require('nvim-treesitter.configs').setup {
+    highlight = {
+        enable = true,
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+    },
+}
+
 -- lualine.nvim
 require('lualine').setup()
+
+-- bufferline.nvim
+require("bufferline").setup{
+    highlights = require("catppuccin.groups.integrations.bufferline").get()
+}
 
 -- indent-blankline.nvim
 require("ibl").setup()

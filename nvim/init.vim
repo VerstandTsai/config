@@ -2,6 +2,7 @@
 call plug#begin()
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
