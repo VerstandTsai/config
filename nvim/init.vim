@@ -36,13 +36,15 @@ endfor
 inoremap {<CR> {<CR>}<ESC>O
 
 " Switch between windows
-map <silent><A-Tab> <ESC><C-w>w
+map <silent><A-left> <ESC><C-w><left>
+map <silent><A-right> <ESC><C-w><right>
+map <silent><A-up> <ESC><C-w><up>
+map <silent><A-down> <ESC><C-w><down>
 
 " Managing buffers
-map <silent><A-left> :bp<CR>
-map <silent><A-right> :bn<CR>
-map <silent><A-q> :bp\|sp\|bn\|bd<CR>
-"":bp\|bd#<CR>
+map <silent><C-left> :bp<CR>
+map <silent><C-right> :bn<CR>
+map <silent><C-q> :bp\|sp\|bn\|bd<CR>
 
 " Remove pair of empty brackets
 function! RemoveBracketPair()
