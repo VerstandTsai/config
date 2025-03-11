@@ -36,17 +36,6 @@ endfor
 
 inoremap {<CR> {<CR>}<ESC>O
 
-" Switch between windows
-map <silent><A-left> <ESC><C-w><left>
-map <silent><A-right> <ESC><C-w><right>
-map <silent><A-up> <ESC><C-w><up>
-map <silent><A-down> <ESC><C-w><down>
-
-" Managing buffers
-map <silent><C-left> :bp<CR>
-map <silent><C-right> :bn<CR>
-map <silent><C-q> :bp\|sp\|bn\|bd<CR>
-
 " Remove pair of empty brackets
 function! RemoveBracketPair()
     for pair in s:brackets
@@ -61,6 +50,17 @@ inoremap <expr> <bs> RemoveBracketPair()
 
 " Press enter to apply completion
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+" Switch between windows
+map <silent><A-left> <ESC><C-w><left>
+map <silent><A-right> <ESC><C-w><right>
+map <silent><A-up> <ESC><C-w><up>
+map <silent><A-down> <ESC><C-w><down>
+
+" Managing buffers
+map <silent><C-left> :bp<CR>
+map <silent><C-right> :bn<CR>
+map <silent><C-q> :bp\|sp\|bn\|bd<CR>
 
 " F5 to compile & run
 autocmd FileType c,asm nnoremap <F5> :!clear && gcc -o %:r % && %:r<CR>
