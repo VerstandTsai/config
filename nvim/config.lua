@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 
 -- nvim-treesitter highlighting
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
     highlight = {
         enable = true,
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -81,13 +81,13 @@ require('nvim-treesitter.configs').setup {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
-}
+})
 
 -- lualine.nvim
 require('lualine').setup()
 
 -- bufferline.nvim
-require("bufferline").setup{
+require("bufferline").setup({
     highlights = require("catppuccin.groups.integrations.bufferline").get(),
     options = {
         indicator = {
@@ -102,8 +102,13 @@ require("bufferline").setup{
             }
         }
     }
-}
+})
 
 -- indent-blankline.nvim
 require("ibl").setup()
+
+-- image.nvim
+require("image").setup({
+    processor = "magick_cli"
+})
 
