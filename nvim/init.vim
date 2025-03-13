@@ -66,7 +66,7 @@ map <silent><C-q> :bp\|sp\|bn\|bd<CR>
 autocmd FileType c,asm nnoremap <F5> :!clear && gcc -o %:r % && %:r<CR>
 autocmd FileType cpp nnoremap <F5> :!clear && g++ -o %:r % && %:r<CR>
 autocmd FileType python nnoremap <F5> :!clear && python3 %<CR>
-autocmd FileType tex nnoremap <F5> :silent !xelatex %<CR>
+autocmd FileType tex nnoremap <F5> :silent !xelatex % && bibtex %:r && xelatex % && xelatex %<CR>
 
 " Maps and unmaps for non-programming languages
 autocmd FileType html iunmap '
