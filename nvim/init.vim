@@ -27,6 +27,9 @@ set shiftwidth=4
 " Convert tab to spaces
 set expandtab
 
+" Highlight trailing spaces
+match CurSearch /\s\+$/
+
 " Auto-closing brackets
 let s:brackets = ['""', "''", "()", "[]", "{}"]
 
