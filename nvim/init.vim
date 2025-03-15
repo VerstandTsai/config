@@ -52,15 +52,15 @@ inoremap <expr> <bs> RemoveBracketPair()
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Switch between windows
-map <silent><A-left> <ESC><C-w><left>
-map <silent><A-right> <ESC><C-w><right>
-map <silent><A-up> <ESC><C-w><up>
-map <silent><A-down> <ESC><C-w><down>
+nnoremap <silent><A-left> <ESC><C-w><left>
+nnoremap <silent><A-right> <ESC><C-w><right>
+nnoremap <silent><A-up> <ESC><C-w><up>
+nnoremap <silent><A-down> <ESC><C-w><down>
 
 " Managing buffers
-map <silent><C-left> :bp<CR>
-map <silent><C-right> :bn<CR>
-map <silent><C-q> :bp\|sp\|bn\|bd<CR>
+nnoremap <silent><C-left> :bp<CR>
+nnoremap <silent><C-right> :bn<CR>
+nnoremap <silent><C-q> :bp\|sp\|bn\|bd<CR>
 
 " F5 to compile & run
 autocmd FileType c,asm nnoremap <F5> :!clear && gcc -o %:r % && %:r<CR>
