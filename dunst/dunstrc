@@ -1,6 +1,6 @@
 [global]
 width = 480
-font = "Noto Color Emoji 12, FreeSans 12"
+font = "Noto Color Emoji 12, sans-serif 12"
 corner_radius = 8
 frame_width = 1
 frame_color = "#8aadf4"
