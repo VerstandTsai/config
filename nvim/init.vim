@@ -66,9 +66,9 @@ nnoremap <silent><C-right> :bn<CR>
 nnoremap <silent><C-q> :bp\|sp\|bn\|bd<CR>
 
 " F5 to compile & run
-autocmd FileType c,asm nnoremap <F5> :!clear && gcc -o %:r % && %:r<CR>
-autocmd FileType cpp nnoremap <F5> :!clear && g++ -o %:r % && %:r<CR>
-autocmd FileType python nnoremap <F5> :!clear && python3 %<CR>
+autocmd FileType c,asm nnoremap <F5> :!gcc -o %:r % && ./%:r<CR>
+autocmd FileType cpp nnoremap <F5> :!g++ -o %:r % && ./%:r<CR>
+autocmd FileType python nnoremap <F5> :!python3 %<CR>
 autocmd FileType tex nnoremap <F5> :silent !xelatex % && bibtex %:r && xelatex % && xelatex %<CR>
 
 " Maps and unmaps for non-programming languages
