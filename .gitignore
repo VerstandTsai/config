@@ -6,6 +6,8 @@
 !hypr/*
 !eww
 !eww/*
+!wofi
+!wofi/*
 !dunst
 !dunst/*
 !starship.toml
