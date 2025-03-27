@@ -23,7 +23,8 @@
 }
 
 .powermenu {
-  background-color: $surface0;
+  background-color: rgba($base, 0);
+  border: solid rgba($text, 0.1) 2px;
   border-radius: 24px;
   margin-left: 6px;
   font-size: 26px;
