@@ -66,7 +66,7 @@
 
 .volume trough {
   all: unset;
-  background-color: $surface1;
+  background-color: rgba($text, 0.1);
   border-radius: 4px;
   min-height: 128px;
   min-width: 8px;
