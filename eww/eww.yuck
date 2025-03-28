@@ -71,7 +71,7 @@
 )
 
 (defpoll workspace
-    :interval "0.1s"
+    :interval "0.01s"
     `hyprctl activeworkspace -j`
 )
 
@@ -100,12 +100,12 @@
 )
 
 (defpoll vol
-    :interval "0.1s"
+    :interval "0.01s"
     `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'`
 )
 
 (defpoll muted
-    :interval "0.1s"
+    :interval "0.01s"
     `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}'`
 )
 
@@ -124,7 +124,7 @@
                     :min 0
                     :max 101
                     :value {vol * 100}
-                    :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ $(lua -e 'print({}/100)')"
+                    :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ $(python -c 'print({}/100)')"
                 )
             )
             (eventbox
