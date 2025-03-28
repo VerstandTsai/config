@@ -70,32 +70,30 @@
     )
 )
 
-(defpoll workspace
+(defpoll active_ws
     :interval "0.01s"
-    `hyprctl activeworkspace -j`
+    `hyprctl -j activeworkspace`
 )
 
-(defwidget wsdot [index]
-    (eventbox
-        :onclick "hyprctl dispatch workspace ${index}"
-        :cursor "pointer"
-        {workspace["id"] == index ? "" : ""}
-    )
+(defpoll workspaces
+    :interval "0.01s"
+    `hyprctl -j workspaces`
 )
 
 (defwidget workspaces []
     (box
         :class "workspaces"
         :orientation "v"
+        :valign "center"
         :space-evenly false
-        (wsdot :index 1)
-        (wsdot :index 2)
-        (wsdot :index 3)
-        (wsdot :index 4)
-        (wsdot :index 5)
-        (wsdot :index 6)
-        (wsdot :index 7)
-        (wsdot :index 8)
+        (for i in "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+            (eventbox
+                :class {i <= arraylength(workspaces) ? "exist" : "nonexist"}
+                :onclick "hyprctl dispatch workspace ${i}"
+                :cursor "pointer"
+                {i == active_ws["id"] ? "" : ""}
+            )
+        )
     )
 )
 
@@ -180,7 +178,6 @@
 
 (defwidget top []
     (box
-        :class "top"
         :orientation "v"
         :valign "start"
         :space-evenly false
@@ -190,15 +187,11 @@
 )
 
 (defwidget center []
-    (box
-        :class "center"
-        (workspaces)
-    )
+    (workspaces)
 )
 
 (defwidget bottom []
     (box
-        :class "bottom"
         :orientation "v"
         :valign "end"
         :space-evenly false
@@ -208,26 +201,22 @@
     )
 )
 
-(defwidget sidebar []
+
+(defwindow sidebar
+    :monitor 0
+    :exclusive true
+    :geometry (geometry
+        :x "32px"
+        :y 0
+        :height "1016px"
+        :width "48px"
+        :anchor "left center"
+    )
     (box
-        :class "sidebar"
         :orientation "v"
         (top)
         (center)
         (bottom)
     )
-)
-
-(defwindow sidebar
-    :monitor 0
-    :geometry (geometry
-        :x "32px"
-        :y 0
-        :height "95%"
-        :width "48px"
-        :anchor "left center"
-    )
-    :exclusive true
-    (sidebar)
 )
 
