@@ -1,14 +1,14 @@
 *
 !.gitignore
 !nvim
-!nvim/*
+!nvim/**
 !hypr
-!hypr/*
+!hypr/**
 !eww
-!eww/*
+!eww/**
 !wofi
-!wofi/*
+!wofi/**
 !dunst
-!dunst/*
+!dunst/**
 !starship.toml
 

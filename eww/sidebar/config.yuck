@@ -1,0 +1,233 @@
+(defwidget poweroff []
+    (eventbox
+        :class "poweroff"
+        :onclick "poweroff"
+        :cursor "pointer"
+        :tooltip "關機"
+        ""
+    )
+)
+
+(defwidget reboot []
+    (eventbox
+        :class "reboot"
+        :onclick "reboot"
+        :cursor "pointer"
+        :tooltip "重新開機"
+        ""
+    )
+)
+
+(defwidget logout []
+    (eventbox
+        :class "logout"
+        :onclick "hyprctl dispatch exit"
+        :cursor "pointer"
+        :tooltip "登出"
+        ""
+    )
+)
+
+(defwidget powermenu []
+    (box
+        :class "powermenu"
+        :orientation "v"
+        (poweroff)
+        (reboot)
+        (logout)
+    )
+)
+
+(defvar archhover false)
+
+(defwidget archlinux []
+    (eventbox
+        :onhover "eww update archhover=true"
+        :onhoverlost "eww update archhover=false"
+        (box
+            :class "archlinux"
+            :orientation "v"
+            :space-evenly false
+            "󰣇"
+            (revealer
+                :reveal archhover
+                :transition "slidedown"
+                (powermenu)
+            )
+        )
+    )
+)
+
+(defwidget tray []
+    (eventbox
+        :class "tray"
+        :cursor "pointer"
+        (systray
+            :orientation "v"
+            :icon-size 26
+            :spacing 12
+        )
+    )
+)
+
+(defpoll workspace
+    :interval "0.01s"
+    `hyprctl activeworkspace -j`
+)
+
+(defwidget wsdot [index]
+    (eventbox
+        :onclick "hyprctl dispatch workspace ${index}"
+        :cursor "pointer"
+        {workspace["id"] == index ? "" : ""}
+    )
+)
+
+(defwidget workspaces []
+    (box
+        :class "workspaces"
+        :orientation "v"
+        :space-evenly false
+        (wsdot :index 1)
+        (wsdot :index 2)
+        (wsdot :index 3)
+        (wsdot :index 4)
+        (wsdot :index 5)
+        (wsdot :index 6)
+        (wsdot :index 7)
+        (wsdot :index 8)
+    )
+)
+
+(defpoll vol
+    :interval "0.01s"
+    `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'`
+)
+
+(defpoll muted
+    :interval "0.01s"
+    `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}'`
+)
+
+(defwidget volume []
+    (tooltip
+        "音量：${round(vol * 100, 0)}%"
+        (box
+            :class "volume"
+            :orientation "v"
+            :space-evenly false
+            (eventbox
+                :cursor "grabbing"
+                (scale
+                    :orientation "v"
+                    :flipped true
+                    :min 0
+                    :max 101
+                    :value {vol * 100}
+                    :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ $(python -c 'print({}/100)')"
+                )
+            )
+            (eventbox
+                :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+                :cursor "pointer"
+                (box
+                    :class "volicon"
+                    {
+                        muted == "[MUTED]" ? "󰖁" :
+                        vol > 0.5 ? "󰕾" :
+                        vol > 0   ? "󰖀" : "󰕿"
+                    }
+                )
+            )
+        )
+    )
+)
+
+(defvar baticon "󰂎󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰁹")
+(defvar baticon_charging "󰢟󰢜󰂆󰂇󰂈󰢝󰂉󰢞󰂊󰂋󰂅")
+
+(defwidget battery []
+    (box
+        :class "battery"
+        :tooltip "剩餘電量：${EWW_BATTERY['BAT1']['capacity']}%"
+        {
+            EWW_BATTERY["BAT1"]["status"] == "Charging" ?
+                substring(baticon_charging, round(EWW_BATTERY["BAT1"]["capacity"] / 10, 0), 1) :
+                substring(baticon         , round(EWW_BATTERY["BAT1"]["capacity"] / 10, 0), 1)
+        }
+    )
+)
+
+(defvar clockicon " ")
+(defwidget time []
+    (box
+        :class "time"
+        :orientation "v"
+        :space-evenly false
+        :tooltip {formattime(EWW_TIME, "%Y 年 %-m 月 %-d 日 %-H 時 %-M 分")}
+        (box
+            :class "clockicon"
+            {substring(clockicon, formattime(EWW_TIME, "%I"), 1)}
+        )
+        (box
+            :class "digits"
+            :orientation "v"
+            (box {formattime(EWW_TIME, "%H")})
+            (box {formattime(EWW_TIME, "%M")})
+        )
+    )
+)
+
+(defwidget top []
+    (box
+        :class "top"
+        :orientation "v"
+        :valign "start"
+        :space-evenly false
+        (archlinux)
+        (tray)
+    )
+)
+
+(defwidget center []
+    (box
+        :class "center"
+        (workspaces)
+    )
+)
+
+(defwidget bottom []
+    (box
+        :class "bottom"
+        :orientation "v"
+        :valign "end"
+        :space-evenly false
+        (volume)
+        (battery)
+        (time)
+    )
+)
+
+(defwidget sidebar []
+    (box
+        :class "sidebar"
+        :orientation "v"
+        (top)
+        (center)
+        (bottom)
+    )
+)
+
+(defwindow sidebar
+    :monitor 0
+    :geometry (geometry
+        :x "32px"
+        :y 0
+        :height "95%"
+        :width "48px"
+        :anchor "left center"
+    )
+    :exclusive true
+    (sidebar)
+)
+
