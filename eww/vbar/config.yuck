@@ -201,17 +201,9 @@
     )
 )
 
-
-(defwindow sidebar
-    :monitor 0
-    :geometry (geometry
-        :x "32px"
-        :y 0
-        :height "1016px"
-        :width "48px"
-        :anchor "left center"
-    )
+(defwidget vbar []
     (box
+        :class "vbar"
         :orientation "v"
         (top)
         (center)
