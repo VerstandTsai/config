@@ -1,2 +1,3 @@
 (include "sidebar/config.yuck")
+(include "wallpaper/config.yuck")
 

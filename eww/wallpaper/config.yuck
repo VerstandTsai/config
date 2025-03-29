@@ -1,0 +1,16 @@
+(defwindow wallpaper
+    :monitor 0
+    :geometry (geometry
+        :x 0
+        :y 0
+        :width "100%"
+        :height "100%"
+        :anchor "top left"
+    )
+    :stacking "bg"
+    (image
+        :path "/home/verstand/Pictures/wallpapers/anon_soyo.png"
+        :image-width 1920
+    )
+)
+

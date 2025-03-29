@@ -204,7 +204,6 @@
 
 (defwindow sidebar
     :monitor 0
-    :exclusive true
     :geometry (geometry
         :x "32px"
         :y 0
