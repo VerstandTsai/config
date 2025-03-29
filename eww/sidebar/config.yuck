@@ -71,12 +71,12 @@
 )
 
 (defpoll active_ws
-    :interval "0.01s"
+    :interval "0.1s"
     `hyprctl -j activeworkspace`
 )
 
 (defpoll workspaces
-    :interval "0.01s"
+    :interval "0.1s"
     `hyprctl -j workspaces`
 )
 
@@ -98,12 +98,12 @@
 )
 
 (defpoll vol
-    :interval "0.01s"
+    :interval "0.1s"
     `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'`
 )
 
 (defpoll muted
-    :interval "0.01s"
+    :interval "0.1s"
     `wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}'`
 )
 
