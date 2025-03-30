@@ -1,0 +1,8 @@
+show = dmenu
+orientation = horizontal
+width = 47%
+height = 30%
+hide_search = true
+halign = center
+sort_order = alphabetical
+
