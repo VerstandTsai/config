@@ -37,13 +37,14 @@
 #input {
   font-size: 20px;
   padding: 8px;
-  border: 0;
+  border: solid transparent 1px;
   border-radius: 8px;
   background-color: alpha(@surface0, 0.5);
 }
 
 #input:focus {
-  box-shadow: @blue 0 0 0 1px;
+  box-shadow: none;
+  border: solid @blue 1px;
 }
 
 #scroll {
@@ -63,12 +64,24 @@
 
 #entry {
   padding: 8px;
-  border-radius: 8px;
   outline: none;
+  transition: background-color 0.1s;
+}
+
+#entry:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+#entry:last-child {
+  border-radius: 0 0 8px 8px;
 }
 
 #entry:selected {
   background-color: alpha(@blue, 0.8);
+}
+
+#entry #text {
+  transition: color 0.1s;
 }
 
 #entry:selected #text {
