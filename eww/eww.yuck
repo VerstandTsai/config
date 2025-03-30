@@ -11,7 +11,7 @@
     )
     :stacking "bg"
     (image
-        :path "/home/verstand/Pictures/wallpapers/anon_soyo.png"
+        :path "${get_env("HOME")}/Pictures/wallpapers/anon_soyo.png"
         :image-width 1920
     )
 )

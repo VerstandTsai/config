@@ -45,14 +45,6 @@
   .workspaces {
     margin-right: 10px;
     color: $text;
-
-    * {
-      transition: all 0.2s;
-    }
-
-    .nonexist {
-      font-size: 0;
-    }
   }
 
   .volume {

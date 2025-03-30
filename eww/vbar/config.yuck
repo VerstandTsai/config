@@ -86,13 +86,15 @@
         :orientation "v"
         :valign "center"
         :space-evenly false
-        (for i in "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+        (for ws in workspaces
             (eventbox
-                :class {i <= arraylength(workspaces) ? "exist" : "nonexist"}
-                :onclick "hyprctl dispatch workspace ${i}"
                 :cursor "pointer"
-                {i == active_ws["id"] ? "" : ""}
+                {ws["id"] == active_ws["id"] ? "" : ""}
             )
+        )
+        (box
+            :style "font-size: 0;"
+            {active_ws["id"]}
         )
     )
 )
