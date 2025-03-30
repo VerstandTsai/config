@@ -89,6 +89,7 @@
         (for ws in workspaces
             (eventbox
                 :cursor "pointer"
+                :onclick "hyprctl dispatch workspace ${ws["id"]}"
                 {ws["id"] == active_ws["id"] ? "" : ""}
             )
         )
