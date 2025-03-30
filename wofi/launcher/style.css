@@ -27,7 +27,7 @@
 
 #window {
   border-radius: 8px;
-  background-color: alpha(@base, 0.1);
+  background-color: alpha(@base, 0.5);
 }
 
 #outer-box {
