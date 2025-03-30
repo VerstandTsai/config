@@ -42,6 +42,10 @@
   background-color: alpha(@surface0, 0.5);
 }
 
+#input:focus {
+  box-shadow: @blue 0 0 0 1px;
+}
+
 #scroll {
   margin-top: 16px;
   border-radius: 8px;
@@ -60,6 +64,7 @@
 #entry {
   padding: 8px;
   border-radius: 8px;
+  outline: none;
 }
 
 #entry:selected {
