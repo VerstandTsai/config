@@ -77,7 +77,7 @@
 }
 
 #entry:selected {
-  background-color: alpha(@blue, 0.8);
+  background-color: @blue;
 }
 
 #entry #text {

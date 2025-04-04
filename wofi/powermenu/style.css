@@ -48,7 +48,7 @@
 }
 
 #entry:nth-child(1):selected {
-  background-color: alpha(@red, 0.8);
+  background-color: @red;
 }
 
 #entry:nth-child(2) #text{
@@ -56,7 +56,7 @@
 }
 
 #entry:nth-child(2):selected {
-  background-color: alpha(@yellow, 0.8);
+  background-color: @yellow;
 }
 
 #entry:nth-child(3) #text{
@@ -64,7 +64,7 @@
 }
 
 #entry:nth-child(3):selected {
-  background-color: alpha(@green, 0.8);
+  background-color: @green;
 }
 
 #entry #text {

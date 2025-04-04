@@ -69,7 +69,7 @@ nnoremap <silent><C-q> :bp\|sp\|bn\|bd<CR>
 autocmd FileType c,asm nnoremap <F5> :!gcc -o %:r % && ./%:r<CR>
 autocmd FileType cpp nnoremap <F5> :!g++ -o %:r % && ./%:r<CR>
 autocmd FileType python nnoremap <F5> :!python3 %<CR>
-autocmd FileType tex nnoremap <F5> :silent !lualatex % && bibtex %:r && lualatex % && lualatex %<CR>
+autocmd FileType tex nnoremap <F5> :silent !lualatex %<CR>
 
 " Maps and unmaps for non-programming languages
 autocmd FileType html iunmap '
