@@ -11,7 +11,7 @@
     )
     :stacking "bg"
     (image
-        :path {get_env("WALLPAPER")}
+        :path "${get_env("HOME")}/.wallpaper"
         :image-width 1920
     )
 )
