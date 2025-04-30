@@ -2,7 +2,7 @@
 @import 'vbar/style';
 
 .sidebar {
-  border: 0;
+  border: 1px solid $overlay0;
   border-radius: 24px;
   background-color: rgba($base, 0.2);
 }

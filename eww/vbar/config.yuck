@@ -64,6 +64,7 @@
         :cursor "pointer"
         (systray
             :orientation "v"
+            :prepend-new false
             :icon-size 26
             :spacing 12
         )
