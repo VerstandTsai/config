@@ -1,60 +1,9 @@
-(defwidget poweroff []
-    (eventbox
-        :class "poweroff"
-        :onclick "poweroff"
-        :cursor "pointer"
-        :tooltip "關機"
-        ""
-    )
-)
-
-(defwidget reboot []
-    (eventbox
-        :class "reboot"
-        :onclick "reboot"
-        :cursor "pointer"
-        :tooltip "重新開機"
-        ""
-    )
-)
-
-(defwidget logout []
-    (eventbox
-        :class "logout"
-        :onclick "hyprctl dispatch exit"
-        :cursor "pointer"
-        :tooltip "登出"
-        ""
-    )
-)
-
-(defwidget powermenu []
+(defwidget archicon []
     (box
-        :class "powermenu"
+        :class "archicon"
         :orientation "v"
-        (poweroff)
-        (reboot)
-        (logout)
-    )
-)
-
-(defvar archhover false)
-
-(defwidget archlinux []
-    (eventbox
-        :onhover "eww update archhover=true"
-        :onhoverlost "eww update archhover=false"
-        (box
-            :class "archlinux"
-            :orientation "v"
-            :space-evenly false
-            "󰣇"
-            (revealer
-                :reveal archhover
-                :transition "slidedown"
-                (powermenu)
-            )
-        )
+        :space-evenly false
+        "󰣇"
     )
 )
 
@@ -185,7 +134,7 @@
         :orientation "v"
         :valign "start"
         :space-evenly false
-        (archlinux)
+        (archicon)
         (tray)
     )
 )
