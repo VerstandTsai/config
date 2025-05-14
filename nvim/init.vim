@@ -27,6 +27,8 @@ set shiftwidth=4
 " Convert tab to spaces
 set expandtab
 
+set foldmethod=marker
+
 " Highlight trailing spaces
 match CurSearch /\s\+$/
 
