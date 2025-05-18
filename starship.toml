@@ -15,6 +15,7 @@ $directory\
 [](fg:sapphire bg:sky)\
 $git_branch\
 $git_status\
+$python\
 [](fg:sky bg:teal)\
 $time\
 [ ](fg:teal)\
@@ -27,6 +28,11 @@ disabled = false
 style = 'bold bg:teal fg:base'
 format = '[  $time ]($style)'
 time_format = '%R'
+
+[python]
+style = "bold bg:sky fg:base"
+symbol = ' '
+format = '[ $symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
 
 [git_branch]
 style = "bold bg:sky fg:base"
