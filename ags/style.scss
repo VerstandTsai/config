@@ -35,6 +35,24 @@
       margin: 0 8px;
     }
   }
+
+  .AudioSlider {
+    slider {
+      border-color: $base;
+      background-image: none;
+      background-color: $text;
+    }
+
+    trough {
+      border-color: transparent;
+      background-color: $base;
+    }
+
+    highlight {
+      border-color: transparent;
+      background-color: $blue;
+    }
+  }
 }
 
 .Wallpaper > box {

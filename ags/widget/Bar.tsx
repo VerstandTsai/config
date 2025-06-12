@@ -3,6 +3,7 @@ import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { execAsync } from "astal/process"
 import Hyprland from "gi://AstalHyprland"
 import Tray from "gi://AstalTray"
+import Wp from "gi://AstalWp"
 import Battery from "gi://AstalBattery"
 
 function Start() {
@@ -63,6 +64,21 @@ function SysTray() {
   </box>
 }
 
+function AudioSlider() {
+    const speaker = Wp.get_default()?.audio.defaultSpeaker!
+
+    return <box className="AudioSlider" css="min-width: 140px">
+      <button onClicked={() => speaker.mute = !speaker.mute}>
+        <icon icon={bind(speaker, "volumeIcon")} />
+      </button>
+      <slider
+        hexpand
+        onDragged={({ value }) => speaker.volume = value}
+        value={bind(speaker, "volume")}
+      />
+    </box>
+}
+
 function BatteryLevel() {
   const bat = Battery.get_default()
 
@@ -77,7 +93,7 @@ function BatteryLevel() {
 
 function Time() {
   const time = Variable("").poll(1000,
-    "date +'%Y 年 %-m 月 %-d 日　%A　%p %H:%M'")
+    "date +'%Y 年 %-m 月 %-d 日 %A %p %H:%M'")
   return <label
     className="Time"
     label={time()}
@@ -90,7 +106,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   return <window
     className="Bar"
     gdkmonitor={gdkmonitor}
-    exclusivity={Astal.Exclusivity.IGNORE}
+    exclusivity={Astal.Exclusivity.EXCLUSIVE}
     anchor={TOP | LEFT | RIGHT}
     application={App}>
     <centerbox>
@@ -103,6 +119,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       </box>
       <box halign={Gtk.Align.END}>
         <SysTray/>
+        <AudioSlider/>
         <BatteryLevel/>
         <Time/>
       </box>
