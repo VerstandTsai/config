@@ -81,8 +81,8 @@ autocmd FileType tex inoremap " ``"<left>
 autocmd FileType tex inoremap $ $$<left>
 
 " 2-space tab for certain laguages
-autocmd FileType html,css,javascript,tex set tabstop=2
-autocmd FileType html,css,javascript,tex set shiftwidth=2
+autocmd FileType html,css,javascript,typescript,typescriptreact,tex set tabstop=2
+autocmd FileType html,css,javascript,typescript,typescriptreact,tex set shiftwidth=2
 
 luafile ~/.config/nvim/config.lua
 

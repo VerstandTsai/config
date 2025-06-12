@@ -1,0 +1,45 @@
+@use 'macchiato' as *;
+
+.Bar {
+  background-color: rgba($base, 0.8);
+  color: $text;
+  font-weight: bold;
+
+  button {
+    all: unset;
+  }
+
+  > centerbox {
+    min-height: 32px;
+    padding: 0 8px;
+
+    > box > * {
+      margin: 0 8px;
+    }
+  }
+
+  .Start {
+    font-size: 20px;
+    color: $blue;
+  }
+
+  .Workspaces > button {
+    font-size: 24px;
+    margin: 0 8px;
+  }
+
+  .SysTray {
+    font-weight: normal;
+
+    > button {
+      margin: 0 8px;
+    }
+  }
+}
+
+.Wallpaper > box {
+  min-width: 1920px;
+  min-height: 1080px;
+  background-image: url("/home/verstand/.wallpaper");
+}
+

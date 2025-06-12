@@ -4,8 +4,8 @@
 !nvim/**
 !hypr
 !hypr/**
-!eww
-!eww/**
+!ags
+!ags/**
 !wofi
 !wofi/**
 !dunst
