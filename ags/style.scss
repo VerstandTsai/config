@@ -10,7 +10,6 @@
   }
 
   > centerbox {
-    min-height: 32px;
     padding: 0 8px;
 
     > box > * {
@@ -33,6 +32,15 @@
 
     > button {
       margin: 0 8px;
+    }
+
+    menu {
+      background-color: rgba($base, 0.8);
+
+      > menuitem:hover {
+        color: $base;
+        background-color: $blue;
+      }
     }
   }
 
