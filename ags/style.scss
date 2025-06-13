@@ -63,6 +63,53 @@
   }
 }
 
+.PowerMenu {
+  centerbox {
+    background-color: rgba($base, 0.5);
+    padding: 64px 48px;
+    border-radius: 384px;
+  }
+
+  button {
+    all: unset;
+    font-size: 256px;
+    padding-left: 64px;
+    padding-right: 128px;
+    margin: 0 16px;
+    border-radius: 256px;
+    background-color: rgba($base, 0.5);
+    transition: all 0.2s ease;
+  }
+
+  .PowerOff {
+    color: $red;
+  }
+
+  .Restart {
+    color: $yellow;
+  }
+
+  .LogOut {
+    color: $green;
+  }
+
+  .selected {
+    color: $base;
+
+    &.PowerOff {
+      background-color: $red;
+    }
+
+    &.Restart {
+      background-color: $yellow;
+    }
+
+    &.LogOut {
+      background-color: $green;
+    }
+  }
+}
+
 .Wallpaper > box {
   min-width: 1920px;
   min-height: 1080px;
