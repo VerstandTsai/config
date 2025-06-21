@@ -115,13 +115,12 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <Workspaces/>
       </box>
       <box>
-        <FocusedClient/>
+        <Time/>
       </box>
       <box halign={Gtk.Align.END}>
         <SysTray/>
         <AudioSlider/>
         <BatteryLevel/>
-        <Time/>
       </box>
     </centerbox>
   </window>
