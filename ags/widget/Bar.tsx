@@ -91,9 +91,17 @@ function BatteryLevel() {
   </box>
 }
 
+function Date() {
+  const date = Variable("").poll(1000,
+    "date +'    %Y 年 %-m 月 %-d 日 %A'")
+  return <label
+    className="Date"
+    label={date()}
+  />
+}
+
 function Time() {
-  const time = Variable("").poll(1000,
-    "date +'%Y 年 %-m 月 %-d 日 %A %p %H:%M'")
+  const time = Variable("").poll(1000, "date +'󰅐  %p %H:%M'")
   return <label
     className="Time"
     label={time()}
@@ -115,6 +123,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <Workspaces/>
       </box>
       <box>
+        <Date/>
         <Time/>
       </box>
       <box halign={Gtk.Align.END}>
