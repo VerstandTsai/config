@@ -57,7 +57,7 @@ function SysTray() {
         {(item: Tray.TrayItem) =>
           <menubutton>
             {PopMenu(item)}
-            <image gicon={item.gicon}/>
+            <image gicon={createBinding(item, "gicon")}/>
           </menubutton>
         }
       </For>
