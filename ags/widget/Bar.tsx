@@ -1,6 +1,8 @@
-import { Variable, bind } from "astal"
-import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { execAsync } from "astal/process"
+import app from "ags/gtk4/app"
+import { Astal, Gdk } from "ags/gtk4"
+import { execAsync } from "ags/process"
+import { createPoll } from "ags/time"
+import { createBinding, With, For } from "ags"
 import Hyprland from "gi://AstalHyprland"
 import Tray from "gi://AstalTray"
 import Wp from "gi://AstalWp"
@@ -8,8 +10,8 @@ import Battery from "gi://AstalBattery"
 
 function Start() {
   return <button
-    className="Start"
-    onClick={() => execAsync("wofi")}>
+    class="Start"
+    onClicked={() => execAsync("wofi")}>
     {"󰣇"}
   </button>
 }
@@ -17,120 +19,125 @@ function Start() {
 function Workspaces() {
   const hypr = Hyprland.get_default()
 
-  return <box className="Workspaces">
-    {bind(hypr, "workspaces").as(wss => wss
-      // filter out special workspaces
-      .filter(ws => !(ws.id >= -99 && ws.id <= -2))
-      .sort((a, b) => a.id - b.id)
-      .map(ws => (
-        <button
-          onClicked={() => ws.focus()}>
-          {bind(hypr, "focusedWorkspace").as(fw =>
-            ws === fw ? "" : "")}
-        </button>
-      ))
-    )}
-  </box>
-}
-
-function FocusedClient() {
-  const hypr = Hyprland.get_default()
-  const focused = bind(hypr, "focusedClient")
-
-  return <box
-    className="Focused"
-    visible={focused.as(Boolean)}>
-    {focused.as(client => (
-      client && <label label={bind(client, "title").as(String)} />
-    ))}
-  </box>
+  return (
+    <With value={createBinding(hypr, "workspaces")}>
+      {(wss: Hyprland.Workspace[]) =>
+        <box class="Workspaces">
+          {wss
+            .filter(ws => !(ws.id >= -99 && ws.id <= -2))
+            .sort((a, b) => a.id - b.id)
+            .map(ws => (
+              <With value={createBinding(hypr, "focusedWorkspace")}>
+                {(focused) =>
+                  <button onClicked={() => ws.focus()}>
+                    {ws === focused ? "" : ""}
+                  </button>
+                }
+              </With>
+            ))
+          }
+        </box>
+      }
+    </With>
+  )
 }
 
 function SysTray() {
   const tray = Tray.get_default()
 
-  return <box className="SysTray">
-    {bind(tray, "items").as(items => items.map(item => (
-      <menubutton
-        tooltipMarkup={bind(item, "tooltipMarkup")}
-        usePopover={false}
-        actionGroup={bind(item, "actionGroup").as(
-          ag => ["dbusmenu", ag]
-        )}
-        menuModel={bind(item, "menuModel")}>
-        <icon gicon={bind(item, "gicon")} />
-      </menubutton>
-    )))}
-  </box>
+  return (
+    <box class="SysTray">
+      <For each={createBinding(tray, "items")}>
+        {(item: Tray.TrayItem) =>
+          <menubutton
+            tooltipMarkup={item.tooltipMarkup}
+            menuModel={item.menuModel}
+          >
+            <image gicon={item.gicon}/>
+          </menubutton>
+        }
+      </For>
+    </box>
+  )
 }
 
 function AudioSlider() {
-    const speaker = Wp.get_default()?.audio.defaultSpeaker!
+  const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-    return <box className="AudioSlider" css="min-width: 140px">
+  return (
+    <box class="AudioSlider">
       <button onClicked={() => speaker.mute = !speaker.mute}>
-        <icon icon={bind(speaker, "volumeIcon")} />
+        <image iconName={createBinding(speaker, "volumeIcon")} />
       </button>
       <slider
-        hexpand
-        onDragged={({ value }) => speaker.volume = value}
-        value={bind(speaker, "volume")}
+        onChangeValue={({value}) => {speaker.volume = value}}
+        value={createBinding(speaker, "volume")}
       />
     </box>
+  )
 }
 
 function BatteryLevel() {
-  const bat = Battery.get_default()
+  const battery = Battery.get_default()
 
-  return <box className="Battery"
-    visible={bind(bat, "isPresent")}>
-    <icon icon={bind(bat, "batteryIconName")} />
-    <label label={bind(bat, "percentage").as(p =>
-      ` ${Math.floor(p * 100)}%`
-    )} />
-  </box>
+  return (
+    <box class="Battery">
+      <image iconName={createBinding(battery, "batteryIconName")} />
+      <With value={createBinding(battery, "percentage")}>
+        {(percentage: number) =>
+          <label label={` ${Math.floor(percentage * 100)}%`} />
+        }
+      </With>
+    </box>
+  )
 }
 
 function Date() {
-  const date = Variable("").poll(1000,
+  const date = createPoll("", 1000,
     "date +'    %Y 年 %-m 月 %-d 日 %A'")
   return <label
-    className="Date"
-    label={date()}
+    class="Date"
+    label={date}
   />
 }
 
 function Time() {
-  const time = Variable("").poll(1000, "date +'󰅐  %p %H:%M'")
+  const time = createPoll("", 1000, "date +'󰅐  %p %H:%M'")
   return <label
-    className="Time"
-    label={time()}
+    class="Time"
+    label={time}
   />
 }
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-  return <window
-    className="Bar"
-    gdkmonitor={gdkmonitor}
-    exclusivity={Astal.Exclusivity.EXCLUSIVE}
-    anchor={TOP | LEFT | RIGHT}
-    application={App}>
-    <centerbox>
-      <box>
-        <Start/>
-        <Workspaces/>
-      </box>
-      <box>
-        <Date/>
-        <Time/>
-      </box>
-      <box halign={Gtk.Align.END}>
-        <SysTray/>
-        <AudioSlider/>
-        <BatteryLevel/>
-      </box>
-    </centerbox>
-  </window>
+  return (
+    <window
+      visible
+      name="bar"
+      class="Bar"
+      gdkmonitor={gdkmonitor}
+      exclusivity={Astal.Exclusivity.EXCLUSIVE}
+      anchor={TOP | LEFT | RIGHT}
+      application={app}
+    >
+      <centerbox cssName="centerbox">
+        <box $type="start">
+          <Start />
+          <Workspaces />
+        </box>
+        <box $type="center">
+          <Date />
+          <Time />
+        </box>
+        <box $type="end">
+          <SysTray />
+          <AudioSlider />
+          <BatteryLevel />
+        </box>
+      </centerbox>
+    </window>
+  )
 }
+

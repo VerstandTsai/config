@@ -1,6 +1,6 @@
-@use 'macchiato' as *;
+@use "node_modules/@catppuccin/palette/scss/macchiato" as *;
 
-.Bar {
+window.Bar {
   background-color: rgba($base, 0.8);
   color: $text;
   font-weight: bold;
@@ -30,14 +30,14 @@
   .SysTray {
     font-weight: normal;
 
-    > button {
+    > menubutton {
       margin: 0 8px;
     }
 
-    menu {
+    popover > contents {
       background-color: rgba($base, 0.8);
 
-      > menuitem:hover {
+      modelbutton:hover {
         color: $base;
         background-color: $blue;
       }
@@ -52,6 +52,7 @@
     }
 
     trough {
+      min-width: 128px;
       border-color: transparent;
       background-color: $base;
     }
@@ -108,11 +109,5 @@
       background-color: $green;
     }
   }
-}
-
-.Wallpaper > box {
-  min-width: 1920px;
-  min-height: 1080px;
-  background-image: url("/home/verstand/.wallpaper");
 }
 
