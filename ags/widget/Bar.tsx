@@ -1,5 +1,5 @@
 import app from "ags/gtk4/app"
-import { Astal, Gdk } from "ags/gtk4"
+import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
 import { createBinding, With, For } from "ags"
@@ -42,6 +42,12 @@ function Workspaces() {
   )
 }
 
+function PopMenu(item: Tray.TrayItem) {
+  const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
+  popover.insert_action_group("dbusmenu", item.actionGroup)
+  return popover
+}
+
 function SysTray() {
   const tray = Tray.get_default()
 
@@ -49,10 +55,8 @@ function SysTray() {
     <box class="SysTray">
       <For each={createBinding(tray, "items")}>
         {(item: Tray.TrayItem) =>
-          <menubutton
-            tooltipMarkup={item.tooltipMarkup}
-            menuModel={item.menuModel}
-          >
+          <menubutton>
+            {PopMenu(item)}
             <image gicon={item.gicon}/>
           </menubutton>
         }
