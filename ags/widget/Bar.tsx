@@ -2,53 +2,51 @@ import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
-import { createBinding, With, For } from "ags"
+import { createBinding, For } from "ags"
 import Hyprland from "gi://AstalHyprland"
 import Tray from "gi://AstalTray"
 import Wp from "gi://AstalWp"
 import Battery from "gi://AstalBattery"
 
 function Start() {
-  return <button
-    class="Start"
-    onClicked={() => execAsync("wofi")}>
-    {"󰣇"}
-  </button>
+  return (
+    <button
+      class="Start"
+      onClicked={() => execAsync("wofi")}>
+      {"󰣇"}
+    </button>
+  )
 }
 
 function Workspaces() {
   const hypr = Hyprland.get_default()
+  const workspaces = createBinding(hypr, "workspaces")
+  const findById =
+    (id: number) => workspaces((wss) => wss.find((ws) => id === ws.id))
+  const focused = createBinding(hypr, "focusedWorkspace")
+  const className =
+    (id: number) => focused((fws) => id === fws.id ? "focused" : "")
 
   return (
-    <With value={createBinding(hypr, "workspaces")}>
-      {(wss: Hyprland.Workspace[]) =>
-        <box class="Workspaces">
-          {wss
-            .filter(ws => !(ws.id >= -99 && ws.id <= -2))
-            .sort((a, b) => a.id - b.id)
-            .map(ws => (
-              <With value={createBinding(hypr, "focusedWorkspace")}>
-                {(focused) =>
-                  <button onClicked={() => ws.focus()}>
-                    {ws === focused ? "" : ""}
-                  </button>
-                }
-              </With>
-            ))
-          }
-        </box>
-      }
-    </With>
+    <box class="Workspaces">
+      {Array.from({length: 10}, (_, i) => i + 1).map((id) =>
+        <button
+          visible={findById(id)((ws) => ws != undefined)}
+          class={className(id)}
+          onClicked={() => findById(id)((ws) => ws != undefined && ws.focus())}
+        />
+      )}
+    </box>
   )
 }
 
-function PopMenu(item: Tray.TrayItem) {
-  const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
-  popover.insert_action_group("dbusmenu", item.actionGroup)
-  return popover
-}
-
 function SysTray() {
+  function popmenu(item: Tray.TrayItem) {
+    const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
+    popover.insert_action_group("dbusmenu", item.actionGroup)
+    return popover
+  }
+
   const tray = Tray.get_default()
 
   return (
@@ -56,7 +54,7 @@ function SysTray() {
       <For each={createBinding(tray, "items")}>
         {(item: Tray.TrayItem) =>
           <menubutton>
-            {PopMenu(item)}
+            {popmenu(item)}
             <image gicon={createBinding(item, "gicon")}/>
           </menubutton>
         }
@@ -83,15 +81,13 @@ function AudioSlider() {
 
 function BatteryLevel() {
   const battery = Battery.get_default()
+  const percentage = createBinding(battery, "percentage")
+  const label = percentage((value) => ` ${Math.floor(value * 100)}%`)
 
   return (
     <box class="Battery">
       <image iconName={createBinding(battery, "batteryIconName")} />
-      <With value={createBinding(battery, "percentage")}>
-        {(percentage: number) =>
-          <label label={` ${Math.floor(percentage * 100)}%`} />
-        }
-      </With>
+      <label label={label} />
     </box>
   )
 }
@@ -99,18 +95,22 @@ function BatteryLevel() {
 function Date() {
   const date = createPoll("", 1000,
     "date +'    %Y 年 %-m 月 %-d 日 %A'")
-  return <label
-    class="Date"
-    label={date}
-  />
+  return (
+    <label
+      class="Date"
+      label={date}
+    />
+  )
 }
 
 function Time() {
   const time = createPoll("", 1000, "date +'󰅐  %p %H:%M'")
-  return <label
-    class="Time"
-    label={time}
-  />
+  return (
+    <label
+      class="Time"
+      label={time}
+    />
+  )
 }
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
