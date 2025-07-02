@@ -33,7 +33,7 @@ function Workspaces() {
         <button
           visible={findById(id)((ws) => ws != undefined)}
           class={className(id)}
-          onClicked={() => findById(id)((ws) => ws != undefined && ws.focus())}
+          onClicked={() => findById(id).get()!.focus()}
         />
       )}
     </box>
