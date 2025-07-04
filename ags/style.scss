@@ -41,8 +41,10 @@ window.Bar {
       margin: 0 8px;
     }
 
-    popover > contents {
-      background-color: rgba($base, 0.5);
+    popover {
+      > * {
+        background-color: rgba($base, 0.5);
+      }
 
       modelbutton:hover {
         color: $base;
