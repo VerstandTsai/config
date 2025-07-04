@@ -1,8 +1,8 @@
 import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
-import { execAsync } from "ags/process"
+import { exec, execAsync } from "ags/process"
 import { createPoll } from "ags/time"
-import { createBinding, For } from "ags"
+import { createState, createBinding, For } from "ags"
 import Hyprland from "gi://AstalHyprland"
 import Tray from "gi://AstalTray"
 import Wp from "gi://AstalWp"
@@ -83,6 +83,15 @@ function BatteryLevel() {
   const battery = Battery.get_default()
   const percentage = createBinding(battery, "percentage")
   const label = percentage((value) => ` ${Math.floor(value * 100)}%`)
+  const [warned, setWarned] = createState(false)
+  percentage.subscribe(() => {
+    if (percentage.get() <= 0.2) {
+      if (!warned.get()) {
+        setWarned(true)
+        exec(["notify-send", "Low Battery", "Please charge the laptop."])
+      }
+    } else { setWarned(false) }
+  })
 
   return (
     <box class="Battery">
