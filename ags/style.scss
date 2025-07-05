@@ -37,6 +37,11 @@ window.Bar {
   .SysTray {
     font-weight: normal;
 
+    image {
+      -gtk-icon-style: regular;
+      -gtk-icon-filter: sepia(100%) saturate(200%) hue-rotate(200deg) brightness(80%);
+    }
+
     > menubutton {
       margin: 0 8px;
     }
