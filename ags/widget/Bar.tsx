@@ -37,9 +37,10 @@ function Workspaces() {
       {Array.from({length: 10}, (_, i) => i + 1).map((id) =>
         <button
           visible={findById(id)((ws) => ws != undefined)}
-          class={className(id)}
           onClicked={() => findById(id).get()!.focus()}
-        />
+        >
+          <box class={className(id)} />
+        </button>
       )}
     </box>
   )

@@ -23,12 +23,8 @@ window.Bar {
     }
   }
 
-  > centerbox {
-    margin: 0 8px;
-
-    > box > * {
-      margin: 0 4px;
-    }
+  > centerbox > * > * {
+    padding: 0 8px;
   }
 
   .Start {
@@ -66,10 +62,10 @@ window.Bar {
     }
   }
 
-  .Workspaces > button {
-    margin: 13px;
+  .Workspaces box {
+    margin: 13px 0;
     padding: 4px;
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: $text;
     transition: all ease 200ms;
 
