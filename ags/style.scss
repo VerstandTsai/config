@@ -74,6 +74,12 @@ window.Bar {
     }
   }
 
+  .Time .ClockIcon {
+    font-size: 20px;
+    margin-top: 4px;
+    margin-right: 8px;
+  }
+
   .SysTray {
     font-weight: normal;
 
@@ -93,7 +99,7 @@ window.Bar {
     trough {
       min-width: 128px;
       border-color: transparent;
-      background-color: $base;
+      background-color: $surface2;
     }
 
     highlight {

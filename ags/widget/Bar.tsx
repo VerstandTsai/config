@@ -111,20 +111,19 @@ function Date() {
   const date = createPoll("", 1000,
     "date +'    %Y 年 %-m 月 %-d 日 %A'")
   return (
-    <label
-      class="Date"
-      label={date}
-    />
+    <label label={date} />
   )
 }
 
 function Time() {
-  const time = createPoll("", 1000, "date +'󰅐  %p %H:%M'")
+  const time = createPoll("", 1000, "date +'%p %H:%M'")
+  const hour = createPoll("", 1000, "date +'%-I'")((value) => Number(value))
+  const clocks = " "
   return (
-    <label
-      class="Time"
-      label={time}
-    />
+    <box class="Time">
+      <label class="ClockIcon" label={hour((i) => clocks[i])} />
+      <label label={time} />
+    </box>
   )
 }
 
