@@ -1,6 +1,6 @@
 import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
-import { exec, execAsync } from "ags/process"
+import { exec } from "ags/process"
 import { createPoll } from "ags/time"
 import { createState, createBinding, For } from "ags"
 import Hyprland from "gi://AstalHyprland"
@@ -10,11 +10,16 @@ import Battery from "gi://AstalBattery"
 
 function Start() {
   return (
-    <button
-      class="Start"
-      onClicked={() => execAsync("wofi")}>
-      {"󰣇"}
-    </button>
+    <menubutton class="Start">
+      󰣇
+      <popover>
+        <box class="PowerMenu">
+          <button class="PowerOff" onClicked={() => exec("poweroff")}></button>
+          <button class="Reboot" onClicked={() => exec("reboot")}></button>
+          <button class="LogOut" onClicked={() => exec("hyprctl dispatch exit")}></button>
+        </box>
+      </popover>
+    </menubutton>
   )
 }
 
