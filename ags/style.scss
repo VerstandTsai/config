@@ -18,8 +18,7 @@
     }
 
     modelbutton:hover {
-      color: $base;
-      background-color: $blue;
+      background-color: rgba($text, 0.2);
     }
   }
 
