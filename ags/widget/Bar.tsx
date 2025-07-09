@@ -14,9 +14,15 @@ function Start() {
       󰣇
       <popover>
         <box class="PowerMenu">
-          <button class="PowerOff" onClicked={() => exec("poweroff")}></button>
-          <button class="Reboot" onClicked={() => exec("reboot")}></button>
-          <button class="LogOut" onClicked={() => exec("hyprctl dispatch exit")}></button>
+          <button class="PowerOff" onClicked={() => exec("poweroff")}>
+            <image iconName="system-shutdown-symbolic" pixelSize={64} />
+          </button>
+          <button class="Reboot" onClicked={() => exec("reboot")}>
+            <image iconName="system-reboot-symbolic" pixelSize={64} />
+          </button>
+          <button class="LogOut" onClicked={() => exec("hyprctl dispatch exit")}>
+            <image iconName="system-log-out-symbolic" pixelSize={64} />
+          </button>
         </box>
       </popover>
     </menubutton>
@@ -109,9 +115,12 @@ function BatteryLevel() {
 
 function Date() {
   const date = createPoll("", 1000,
-    "date +'    %Y 年 %-m 月 %-d 日 %A'")
+    "date +'%Y 年 %-m 月 %-d 日 %A'")
   return (
-    <label label={date} />
+    <box class="Date">
+      <image iconName="x-office-calendar-symbolic" />
+      <label label={date} />
+    </box>
   )
 }
 
