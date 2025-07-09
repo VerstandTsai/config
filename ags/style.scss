@@ -1,7 +1,7 @@
 @use "node_modules/@catppuccin/palette/scss/macchiato" as *;
 @use "node_modules/@catppuccin/palette/css/catppuccin.css";
 
-window.Bar {
+.Bar {
   background-color: rgba($base, 0.8);
   color: $text;
   font-weight: bold;
@@ -105,6 +105,41 @@ window.Bar {
     highlight {
       border-color: transparent;
       background-color: $blue;
+    }
+  }
+}
+
+.Launcher {
+  min-width: 512px;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: rgba($base, 0.5);
+  color: $text;
+  font-size: 24px;
+
+  entry, button {
+    all: unset;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  entry {
+    background-color: rgba($text, 0.2);
+    margin-bottom: 16px;
+  }
+
+  button {
+    image {
+      margin: 0 8px;
+    }
+
+    .AppDesc {
+      font-size: 16px;
+      color: $subtext0;
+    }
+
+    &:focus {
+      background-color: rgba($text, 0.2);
     }
   }
 }

@@ -6,8 +6,6 @@
 !hypr/**
 !ags
 !ags/**
-!wofi
-!wofi/**
 !dunst
 !dunst/**
 !starship.toml
