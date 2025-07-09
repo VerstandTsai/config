@@ -6,8 +6,9 @@ import Pango from "gi://Pango"
 
 export default function Launcher(gdkmonitor: Gdk.Monitor) {
   const apps = new Apps.Apps()
-  const searchBar = new Gtk.Entry({placeholderText: "Search for apps..."})
-  const results = createBinding(searchBar, "text")(
+  const searchEntry = new Gtk.Entry({placeholderText: "Search for apps..."})
+  searchEntry.hexpand = true
+  const results = createBinding(searchEntry, "text")(
     (prompt) => apps.fuzzy_query(prompt).sort((a, b) => b.frequency - a.frequency)
   )
   let thisWindow: Gtk.Window;
@@ -35,8 +36,11 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
         }
       } />
       <box orientation={Gtk.Orientation.VERTICAL}>
-        {searchBar}
-        <scrolledwindow minContentHeight={512}>
+        <box class="SearchBar">
+          <image iconName="system-search-symbolic" pixelSize={26} />
+          {searchEntry}
+        </box>
+        <scrolledwindow>
           <box orientation={Gtk.Orientation.VERTICAL}>
             <For each={results}>
               {(item) =>

@@ -117,22 +117,30 @@
   color: $text;
   font-size: 24px;
 
-  entry, button {
+  image {
+    margin: 0 8px;
+  }
+
+  entry {
+    all: unset;
+  }
+
+  scrolledwindow {
+    min-height: 512px;
+  }
+
+  .SearchBar, button {
     all: unset;
     padding: 16px;
     border-radius: 16px;
   }
 
-  entry {
+  .SearchBar {
     background-color: rgba($text, 0.2);
     margin-bottom: 16px;
   }
 
   button {
-    image {
-      margin: 0 8px;
-    }
-
     .AppDesc {
       font-size: 16px;
       color: $subtext0;
