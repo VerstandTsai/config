@@ -27,6 +27,7 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
         self.hide()
         thisWindow = self
       }}
+      onShow={() => searchEntry.grab_focus()}
     >
       <Gtk.EventControllerKey onKeyPressed={
         ({widget}, keyval) => {
