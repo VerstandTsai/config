@@ -156,14 +156,14 @@
 
 .Dock box {
   margin-bottom: 16px;
-  padding: 16px 12px;
+  padding: 8px;
   border-radius: 32px;
   background-color: rgba($base, 0.5);
 
   .AppButton {
     all: unset;
     padding: 8px;
-    margin: 0 4px;
+    margin: 8px;
     border-radius: 24px;
 
     &:hover {
