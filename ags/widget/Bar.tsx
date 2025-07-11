@@ -38,13 +38,17 @@ function Workspaces() {
   return (
     <box class="Workspaces">
       {Array.from({length: 10}, (_, i) => i + 1).map((id) =>
-        <button
-          class={focused((fws) => id === fws.id ? "focused" : "")}
-          visible={findById(id)((ws) => ws != undefined)}
-          onClicked={() => findById(id).get()!.focus()}
+        <revealer
+          transitionType={Gtk.RevealerTransitionType.CROSSFADE}
+          revealChild={findById(id)((ws) => ws != undefined)}
         >
-          <box />
-        </button>
+          <button
+            class={focused((fws) => id === fws.id ? "focused" : "")}
+            onClicked={() => findById(id).get()!.focus()}
+          >
+            <box />
+          </button>
+        </revealer>
       )}
     </box>
   )
