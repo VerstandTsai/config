@@ -1,7 +1,7 @@
 @use "node_modules/@catppuccin/palette/scss/macchiato" as *;
 @use "node_modules/@catppuccin/palette/css/catppuccin.css";
 
-.Bar {
+.Bar { // {{{
   background-color: rgba($base, 0.8);
   color: $text;
   font-weight: bold;
@@ -22,13 +22,18 @@
     }
   }
 
-  > centerbox > * > * {
+  > centerbox > box > * {
     padding: 0 8px;
   }
 
   .Start {
     font-size: 20px;
     color: $blue;
+    transition: all ease 200ms;
+
+    &:hover {
+      color: rgba($blue, 0.5);
+    }
 
     .PowerMenu {
       .PowerOff {
@@ -60,14 +65,20 @@
     }
   }
 
-  .Workspaces box {
-    margin: 13px 0;
-    padding: 4px;
-    border-radius: 4px;
-    background-color: $text;
-    transition: all ease 200ms;
+  .Workspaces button {
+    > box {
+      margin: 13px 0;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: $text;
+      transition: all ease 200ms;
+    }
 
-    &.focused {
+    &:hover > box {
+      background-color: rgba($text, 0.5);
+    }
+
+    &.focused > box {
       min-width: 32px;
     }
   }
@@ -76,42 +87,50 @@
     margin-right: 8px;
   }
 
-  .Time .ClockIcon {
+  .ClockIcon {
     font-size: 20px;
     margin-top: 4px;
     margin-right: 8px;
   }
 
-  .SysTray {
-    font-weight: normal;
-
+  .SysTray menubutton {
     image {
+      transition: all ease 200ms;
       -gtk-icon-style: regular;
       -gtk-icon-filter: sepia(100%) saturate(200%) hue-rotate(200deg) brightness(80%);
+    }
+
+    &:hover image {
+      -gtk-icon-filter: sepia(100%) saturate(100%) hue-rotate(200deg) brightness(50%);
     }
   }
 
   .AudioSlider {
-    slider {
-      border-color: $base;
-      background-image: none;
-      background-color: $text;
+    button:hover > image {
+      color: rgba($text, 0.5);
     }
 
     trough {
       min-width: 128px;
       border-color: transparent;
       background-color: $surface2;
-    }
 
-    highlight {
-      border-color: transparent;
-      background-color: $blue;
+      highlight {
+        border-color: transparent;
+        background-color: $blue;
+      }
+
+      slider {
+        border-color: $base;
+        background-image: none;
+        background-color: $text;
+      }
     }
   }
 }
+// }}}
 
-.Launcher {
+.Launcher { // {{{
   min-width: 512px;
   padding: 16px;
   border-radius: 16px;
@@ -153,8 +172,9 @@
     }
   }
 }
+// }}}
 
-.Dock box {
+.Dock box { // {{{
   margin-bottom: 16px;
   padding: 8px;
   border-radius: 32px;
@@ -171,4 +191,5 @@
     }
   }
 }
+// }}}
 

@@ -32,20 +32,18 @@ function Start() {
 function Workspaces() {
   const hypr = Hyprland.get_default()
   const workspaces = createBinding(hypr, "workspaces")
-  const findById =
-    (id: number) => workspaces((wss) => wss.find((ws) => id === ws.id))
+  const findById = (id: number) => workspaces((wss) => wss.find((ws) => id === ws.id))
   const focused = createBinding(hypr, "focusedWorkspace")
-  const className =
-    (id: number) => focused((fws) => id === fws.id ? "focused" : "")
 
   return (
     <box class="Workspaces">
       {Array.from({length: 10}, (_, i) => i + 1).map((id) =>
         <button
+          class={focused((fws) => id === fws.id ? "focused" : "")}
           visible={findById(id)((ws) => ws != undefined)}
           onClicked={() => findById(id).get()!.focus()}
         >
-          <box class={className(id)} />
+          <box />
         </button>
       )}
     </box>
@@ -53,7 +51,7 @@ function Workspaces() {
 }
 
 function SysTray() {
-  function popmenu(item: Tray.TrayItem) {
+  const popmenu = (item: Tray.TrayItem) => {
     const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
     popover.insert_action_group("dbusmenu", item.actionGroup)
     return popover
@@ -125,13 +123,12 @@ function Date() {
 }
 
 function Time() {
-  const time = createPoll("", 1000, "date +'%p %H:%M'")
   const hour = createPoll("", 1000, "date +'%-I'")((value) => Number(value))
   const clocks = " "
   return (
     <box class="Time">
       <label class="ClockIcon" label={hour((i) => clocks[i])} />
-      <label label={time} />
+      <label label={createPoll("", 1000, "date +'%p %H:%M'")} />
     </box>
   )
 }
