@@ -132,8 +132,7 @@
 // }}}
 
 .Launcher { // {{{
-  min-width: 512px;
-  padding: 16px;
+  border: solid rgba($text, 0.2) 1px;
   border-radius: 16px;
   background-color: rgba($base, 0.5);
   color: $text;
@@ -148,21 +147,19 @@
   }
 
   scrolledwindow {
-    min-height: 512px;
-  }
-
-  .SearchBar, button {
-    all: unset;
     padding: 16px;
-    border-radius: 16px;
   }
 
   .SearchBar {
-    background-color: rgba($text, 0.2);
-    margin-bottom: 16px;
+    padding: 16px;
+    border-bottom: solid rgba($text, 0.2) 1px;
   }
 
   button {
+    all: unset;
+    padding: 16px;
+    border-radius: 16px;
+
     .AppDesc {
       font-size: 16px;
       color: $subtext0;

@@ -2,7 +2,6 @@ import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { createBinding, For } from "ags"
 import Apps from "gi://AstalApps"
-import Pango from "gi://Pango"
 
 export default function Launcher(gdkmonitor: Gdk.Monitor) {
   const apps = new Apps.Apps()
@@ -34,7 +33,12 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
           <image iconName="system-search-symbolic" pixelSize={26} />
           {searchEntry}
         </box>
-        <scrolledwindow>
+        <scrolledwindow
+          maxContentHeight={512}
+          propagateNaturalHeight={true}
+          propagateNaturalWidth={true}
+          vscrollbarPolicy={Gtk.PolicyType.EXTERNAL}
+        >
           <box orientation={Gtk.Orientation.VERTICAL}>
             <For each={results}>
               {(item) =>
@@ -50,7 +54,6 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
                         class="AppDesc"
                         label={item.description}
                         xalign={0}
-                        ellipsize={Pango.EllipsizeMode.END}
                       />
                     </box>
                   </box>
