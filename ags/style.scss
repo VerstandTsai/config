@@ -149,7 +149,10 @@
   scrolledwindow {
     min-width: 1024px;
     min-height: 512px;
-    padding: 16px;
+
+    > viewport {
+      padding: 16px;
+    }
   }
 
   .SearchBar {
