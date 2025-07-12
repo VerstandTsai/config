@@ -29,13 +29,6 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
       }}
       onShow={() => searchEntry.grab_focus()}
     >
-      <Gtk.EventControllerKey onKeyPressed={
-        ({widget}, keyval) => {
-          if (keyval === Gdk.KEY_Escape) {
-            widget.hide()
-          }
-        }
-      } />
       <box orientation={Gtk.Orientation.VERTICAL}>
         <box class="SearchBar">
           <image iconName="system-search-symbolic" pixelSize={26} />
