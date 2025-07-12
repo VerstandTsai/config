@@ -67,19 +67,20 @@
 
   .Workspaces button {
     > box {
-      margin: 13px 0;
-      padding: 4px;
-      border-radius: 4px;
+      $dot-size: 8px;
+      min-width: $dot-size;
+      border-radius: $dot-size;
+      margin: (34px - $dot-size) / 2 0;
       background-color: $text;
       transition: all ease 200ms;
+
+      &.focused {
+        min-width: $dot-size * 4;
+      }
     }
 
     &:hover > box {
       background-color: rgba($text, 0.5);
-    }
-
-    &.focused > box {
-      min-width: 32px;
     }
   }
 

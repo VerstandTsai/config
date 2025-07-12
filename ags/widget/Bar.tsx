@@ -42,11 +42,8 @@ function Workspaces() {
           transitionType={Gtk.RevealerTransitionType.CROSSFADE}
           revealChild={findById(id)((ws) => ws != undefined)}
         >
-          <button
-            class={focused((fws) => id === fws.id ? "focused" : "")}
-            onClicked={() => findById(id).get()!.focus()}
-          >
-            <box />
+          <button onClicked={() => findById(id).get()!.focus()}>
+            <box class={focused((fws) => id === fws.id ? "focused" : "")} />
           </button>
         </revealer>
       )}
