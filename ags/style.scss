@@ -1,8 +1,10 @@
 @use "node_modules/@catppuccin/palette/scss/macchiato" as *;
 @use "node_modules/@catppuccin/palette/css/catppuccin.css";
 
+$bg-alpha: 0.5;
+
 .Bar { // {{{
-  background-color: rgba($base, 0.8);
+  background-color: rgba($base, $bg-alpha);
   color: $text;
   font-weight: bold;
 
@@ -13,7 +15,7 @@
 
   popover {
     > * {
-      background-color: rgba($base, 0.5);
+      background-color: rgba($base, $bg-alpha);
       border-radius: 8px;
     }
 
@@ -70,7 +72,7 @@
       $dot-size: 8px;
       min-width: $dot-size;
       border-radius: $dot-size;
-      margin: (34px - $dot-size) / 2 0;
+      margin: calc((34px - $dot-size) / 2) 0;
       background-color: $text;
       transition: all ease 200ms;
 
@@ -120,7 +122,7 @@
     trough {
       min-width: 128px;
       border-color: transparent;
-      background-color: $surface2;
+      background-color: rgba($text, 0.2);
 
       highlight {
         border-color: transparent;
@@ -140,7 +142,7 @@
 .Launcher { // {{{
   border: solid rgba($text, 0.2) 1px;
   border-radius: 24px;
-  background-color: rgba($base, 0.8);
+  background-color: rgba($base, $bg-alpha);
   color: $text;
   font-size: 24px;
 
@@ -187,7 +189,7 @@
   margin-bottom: 16px;
   padding: 8px;
   border-radius: 32px;
-  background-color: rgba($base, 0.5);
+  background-color: rgba($base, $bg-alpha);
 
   .AppButton {
     all: unset;
