@@ -107,8 +107,14 @@
   }
 
   .AudioSlider {
-    button:hover > image {
-      color: rgba($text, 0.5);
+    button {
+      > image {
+        transition: all ease 200ms;
+      }
+
+      &:hover > image {
+        color: rgba($text, 0.5);
+      }
     }
 
     trough {
