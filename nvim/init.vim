@@ -2,13 +2,13 @@
 call plug#begin()
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'akinsho/bufferline.nvim', {'tag': '*'}
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug '3rd/image.nvim'
+Plug '3rd/image.nvim', {'commit': '21909e3eb03bc738cce497f45602bf157b396672'}
 call plug#end()
 
 " Line numbers
