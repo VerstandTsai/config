@@ -51,22 +51,43 @@ function Workspaces() {
   )
 }
 
+function Date() {
+  const date = createPoll("", 1000,
+    "date +'%Y 年 %-m 月 %-d 日 %A'")
+  return (
+    <box class="Date">
+      <image iconName="x-office-calendar-symbolic" />
+      <label label={date} />
+    </box>
+  )
+}
+
+function Time() {
+  const hour = createPoll("", 1000, "date +'%-I'")((value) => Number(value))
+  const clocks = " "
+  return (
+    <box class="Time">
+      <label class="ClockIcon" label={hour((i) => clocks[i])} />
+      <label label={createPoll("", 1000, "date +'%p %H:%M'")} />
+    </box>
+  )
+}
+
 function SysTray() {
+  const tray = Tray.get_default()
   const popmenu = (item: Tray.TrayItem) => {
     const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
     popover.insert_action_group("dbusmenu", item.actionGroup)
     return popover
   }
 
-  const tray = Tray.get_default()
-
   return (
     <box class="SysTray">
       <For each={createBinding(tray, "items")}>
         {(item: Tray.TrayItem) =>
-          <menubutton>
+          <menubutton visible={createBinding(item, "status")((status) => !!status)}>
             {popmenu(item)}
-            <image gicon={createBinding(item, "gicon")}/>
+            <image gicon={createBinding(item, "gicon")} />
           </menubutton>
         }
       </For>
@@ -108,28 +129,6 @@ function BatteryLevel() {
     <box class="Battery">
       <image iconName={createBinding(battery, "batteryIconName")} />
       <label label={label} />
-    </box>
-  )
-}
-
-function Date() {
-  const date = createPoll("", 1000,
-    "date +'%Y 年 %-m 月 %-d 日 %A'")
-  return (
-    <box class="Date">
-      <image iconName="x-office-calendar-symbolic" />
-      <label label={date} />
-    </box>
-  )
-}
-
-function Time() {
-  const hour = createPoll("", 1000, "date +'%-I'")((value) => Number(value))
-  const clocks = " "
-  return (
-    <box class="Time">
-      <label class="ClockIcon" label={hour((i) => clocks[i])} />
-      <label label={createPoll("", 1000, "date +'%p %H:%M'")} />
     </box>
   )
 }
