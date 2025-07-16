@@ -24,11 +24,11 @@ export default function Dock(gdkmonitor: Gdk.Monitor) {
       exclusivity={Astal.Exclusivity.IGNORE}
       anchor={Astal.WindowAnchor.BOTTOM}
       application={app}
-      $={(self) => self.marginBottom = -128}
+      $={(self) => self.marginBottom = -96}
     >
       <Gtk.EventControllerMotion
         onEnter={({widget}) => widget.marginBottom = 0}
-        onLeave={({widget}) => widget.marginBottom = -128}
+        onLeave={({widget}) => widget.marginBottom = -96}
       />
       <box>
         {pinnedApps.map((pinned) =>
