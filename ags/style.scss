@@ -7,15 +7,23 @@ button {
   all: unset;
 }
 
-popover {
-  > * {
-    background-color: rgba($base, $bg-alpha);
-    border-radius: 8px;
-  }
+calendar {
+  background: transparent;
+  color: $text;
 
-  modelbutton:hover {
-    background-color: rgba($text, 0.2);
+  > grid > .day-number {
+    &:selected {
+      color: $text;
+
+      &.today {
+        color: $base;
+      }
+    }
   }
+}
+
+popover > * {
+  background-color: rgba($base, $bg-alpha);
 }
 
 .Bar { // {{{
@@ -72,7 +80,7 @@ popover {
       $dot-size: 8px;
       min-width: $dot-size;
       border-radius: $dot-size;
-      margin: calc((34px - $dot-size) / 2) 0;
+      margin: calc((36px - $dot-size) / 2) 0;
       background-color: $text;
       transition: all ease 200ms;
 
@@ -130,19 +138,6 @@ popover {
 
     trough {
       min-width: 128px;
-      border-color: transparent;
-      background-color: rgba($text, 0.2);
-
-      highlight {
-        border-color: transparent;
-        background-color: $blue;
-      }
-
-      slider {
-        border-color: $base;
-        background-image: none;
-        background-color: $text;
-      }
     }
   }
 
@@ -159,14 +154,6 @@ popover {
   color: $text;
   font-size: 24px;
 
-  image {
-    margin: 0 8px;
-  }
-
-  entry {
-    all: unset;
-  }
-
   scrolledwindow {
     min-width: 1024px;
     min-height: 512px;
@@ -174,24 +161,32 @@ popover {
     > viewport {
       padding: 16px;
     }
+
+    button {
+      padding: 16px;
+      border-radius: 16px;
+
+      .AppDesc {
+        font-size: 16px;
+        color: $subtext0;
+      }
+
+      &:focus {
+        background-color: rgba($text, 0.2);
+      }
+    }
   }
 
   .SearchBar {
     padding: 16px;
     border-bottom: solid rgba($text, 0.2) 1px;
-  }
 
-  button {
-    padding: 16px;
-    border-radius: 16px;
-
-    .AppDesc {
-      font-size: 16px;
-      color: $subtext0;
+    image {
+      margin: 0 8px;
     }
 
-    &:focus {
-      background-color: rgba($text, 0.2);
+    entry {
+      all: unset;
     }
   }
 }
@@ -203,7 +198,7 @@ popover {
   border-radius: 24px;
   background-color: rgba($base, $bg-alpha);
 
-  .AppButton {
+  button {
     padding: 4px;
     margin: 8px;
     border-radius: 16px;

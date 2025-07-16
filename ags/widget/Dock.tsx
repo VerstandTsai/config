@@ -32,7 +32,7 @@ export default function Dock(gdkmonitor: Gdk.Monitor) {
       />
       <box>
         {pinnedApps.map((pinned) =>
-          <button class="AppButton" onClicked={() => pinned.launch()}>
+          <button onClicked={() => pinned.launch()}>
             <image iconName={pinned.iconName} pixelSize={64}/>
           </button>
         )}
