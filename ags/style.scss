@@ -154,6 +154,10 @@ popover > * {
   color: $text;
   font-size: 24px;
 
+  image {
+    margin: 0 8px;
+  }
+
   scrolledwindow {
     min-width: 1024px;
     min-height: 512px;
@@ -180,10 +184,6 @@ popover > * {
   .SearchBar {
     padding: 16px;
     border-bottom: solid rgba($text, 0.2) 1px;
-
-    image {
-      margin: 0 8px;
-    }
 
     entry {
       all: unset;
