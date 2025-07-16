@@ -3,33 +3,33 @@
 
 $bg-alpha: 0.5;
 
+button {
+  all: unset;
+}
+
+popover {
+  > * {
+    background-color: rgba($base, $bg-alpha);
+    border-radius: 8px;
+  }
+
+  modelbutton:hover {
+    background-color: rgba($text, 0.2);
+  }
+}
+
 .Bar { // {{{
   background-color: rgba($base, $bg-alpha);
   color: $text;
   font-weight: bold;
 
   button {
-    all: unset;
-    padding: 0 8px;
-  }
-
-  popover {
-    > * {
-      background-color: rgba($base, $bg-alpha);
-      border-radius: 8px;
-    }
-
-    modelbutton:hover {
-      background-color: rgba($text, 0.2);
-    }
-  }
-
-  > centerbox > box > * {
     padding: 0 8px;
   }
 
   .Start {
-    font-size: 20px;
+    padding: 0 8px;
+    font-size: 24px;
     color: $blue;
     transition: all ease 200ms;
 
@@ -86,8 +86,17 @@ $bg-alpha: 0.5;
     }
   }
 
-  .Date > image {
-    margin-right: 8px;
+  .Date {
+    margin: 0 8px;
+    transition: all ease 200ms;
+
+    &:hover {
+      color: rgba($text, 0.5);
+    }
+
+    .DateIcon {
+      margin-right: 8px;
+    }
   }
 
   .ClockIcon {
@@ -136,6 +145,10 @@ $bg-alpha: 0.5;
       }
     }
   }
+
+  .Battery {
+    padding: 0 8px;
+  }
 }
 // }}}
 
@@ -169,7 +182,6 @@ $bg-alpha: 0.5;
   }
 
   button {
-    all: unset;
     padding: 16px;
     border-radius: 16px;
 
@@ -192,7 +204,6 @@ $bg-alpha: 0.5;
   background-color: rgba($base, $bg-alpha);
 
   .AppButton {
-    all: unset;
     padding: 8px;
     margin: 8px;
     border-radius: 24px;

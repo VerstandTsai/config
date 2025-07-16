@@ -55,10 +55,15 @@ function Date() {
   const date = createPoll("", 1000,
     "date +'%Y 年 %-m 月 %-d 日 %A'")
   return (
-    <box class="Date">
-      <image iconName="x-office-calendar-symbolic" />
-      <label label={date} />
-    </box>
+    <menubutton class="Date">
+      <box>
+        <image class="DateIcon" iconName="x-office-calendar-symbolic" />
+        <label label={date} />
+      </box>
+      <popover>
+        <Gtk.Calendar />
+      </popover>
+    </menubutton>
   )
 }
 
