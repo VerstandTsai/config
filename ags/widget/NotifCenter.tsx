@@ -11,7 +11,7 @@ function NotifBox(notif: Notifd.Notification) {
   return (
     <box class="NotifBox" orientation={Gtk.Orientation.VERTICAL}>
       <box class="NotifApp">
-        <image iconName={notif.appIcon} pixelSize={32} />
+        <image iconName={notif.appName.toLowerCase()} pixelSize={24} />
         <label label={notif.appName.toUpperCase()} />
       </box>
       <label class="Summary" label={notif.summary} halign={Gtk.Align.START} />
