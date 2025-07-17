@@ -51,7 +51,7 @@ export default function NotifCenter(gdkmonitor: Gdk.Monitor) {
 
   return (
     <window
-      visible
+      visible={notifsSorted((notifs) => notifs.length > 0)}
       name="notifcenter"
       class="NotifCenter"
       gdkmonitor={gdkmonitor}
@@ -72,7 +72,7 @@ export default function NotifCenter(gdkmonitor: Gdk.Monitor) {
       >
         <box orientation={Gtk.Orientation.VERTICAL}>
           <For each={notifsSorted}>
-            {(notif: Notifd.Notification) => NotifBox(notif)}
+            {(notif) => NotifBox(notif)}
           </For>
         </box>
       </scrolledwindow>
