@@ -9,7 +9,6 @@ export default function Wallpaper(gdkmonitor: Gdk.Monitor) {
       name="wallpaper"
       class="Wallpaper"
       gdkmonitor={gdkmonitor}
-      exclusivity={Astal.Exclusivity.IGNORE}
       anchor={Astal.WindowAnchor.NONE}
       application={app}
     >

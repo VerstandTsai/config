@@ -210,3 +210,27 @@ popover > * {
 }
 // }}}
 
+.NotifBox { // {{{
+  background-color: rgba($base, $bg-alpha);
+  min-width: 512px;
+  min-height: 128px;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  border: solid rgba($text, 0.2) 1px;
+  font-size: 20px;
+  color: $text;
+
+  > .NotifApp {
+    > label {
+      color: rgba($text, 0.8);
+    }
+  }
+
+  .Summary {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+}
+// }}}
+

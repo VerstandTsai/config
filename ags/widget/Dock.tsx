@@ -21,7 +21,6 @@ export default function Dock(gdkmonitor: Gdk.Monitor) {
       name="dock"
       class="Dock"
       gdkmonitor={gdkmonitor}
-      exclusivity={Astal.Exclusivity.IGNORE}
       anchor={Astal.WindowAnchor.BOTTOM}
       application={app}
       $={(self) => self.marginBottom = -96}

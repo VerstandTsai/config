@@ -23,7 +23,6 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
       name="launcher"
       class="Launcher"
       gdkmonitor={gdkmonitor}
-      exclusivity={Astal.Exclusivity.IGNORE}
       anchor={Astal.WindowAnchor.NONE}
       keymode={Astal.Keymode.ON_DEMAND}
       application={app}
