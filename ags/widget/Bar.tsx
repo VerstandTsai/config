@@ -73,7 +73,7 @@ function Time() {
   return (
     <box class="Time">
       <label class="ClockIcon" label={hour((i) => clocks[i])} />
-      <label label={createPoll("", 1000, "date +'%p %H:%M'")} />
+      <label label={createPoll("", 1000, "date +'%p %-I:%M'")} />
     </box>
   )
 }
