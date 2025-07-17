@@ -5,7 +5,7 @@ import Apps from "gi://AstalApps"
 
 export default function Launcher(gdkmonitor: Gdk.Monitor) {
   const apps = new Apps.Apps()
-  let thisWindow: Gtk.Window;
+  let thisWindow: Gtk.Window
   const launchApp = (launchee: Apps.Application) => {
     launchee.launch()
     thisWindow.hide()

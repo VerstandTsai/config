@@ -42,14 +42,14 @@ function NotifWindow(gdkmonitor: Gdk.Monitor) {
 }
 
 export default function NotifCenter(gdkmonitor: Gdk.Monitor) {
-  let thisWindow: Astal.Window;
+  let thisWindow: Astal.Window
   const notifsSorted = createBinding(notifd, "notifications")(
     (notifs) => notifs.sort((a, b) => b.time - a.time)
   )
 
   return (
     <window
-      visible={notifsSorted((notifs) => notifs.length > 0)}
+      visible
       name="notifcenter"
       class="NotifCenter"
       gdkmonitor={gdkmonitor}
@@ -70,11 +70,23 @@ export default function NotifCenter(gdkmonitor: Gdk.Monitor) {
       >
         <box orientation={Gtk.Orientation.VERTICAL}>
           <For each={notifsSorted}>
-            {(notif) =>
-              <button onClicked={() => notif.dismiss()}>
-                {NotifBox(notif)}
-              </button>
-            }
+            {(notif) => {
+              let reva: Gtk.Revealer
+              return (
+                <revealer
+                  $={(self) => reva = self}
+                  revealChild={true}
+                  transitionType={Gtk.RevealerTransitionType.CROSSFADE}
+                >
+                  <button onClicked={() => {
+                    reva.revealChild = false
+                    setTimeout(() => notif.dismiss(), 250)
+                  }}>
+                    {NotifBox(notif)}
+                  </button>
+                </revealer>
+              )
+            }}
           </For>
         </box>
       </scrolledwindow>
