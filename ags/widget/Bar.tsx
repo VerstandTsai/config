@@ -20,8 +20,8 @@ function Start() {
           <button class="Reboot" onClicked={() => exec("reboot")}>
             <image iconName="system-reboot-symbolic" pixelSize={64} />
           </button>
-          <button class="LogOut" onClicked={() => exec("hyprctl dispatch exit")}>
-            <image iconName="system-log-out-symbolic" pixelSize={64} />
+          <button class="Lock" onClicked={() => exec("hyprlock")}>
+            <image iconName="system-lock-screen-symbolic" pixelSize={64} />
           </button>
         </box>
       </popover>
