@@ -6,7 +6,7 @@
 !hypr/**
 !ags
 !ags/**
-!dunst
-!dunst/**
+!fontconfig
+!fontconfig/**
 !starship.toml
 
