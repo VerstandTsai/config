@@ -30,7 +30,10 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
         self.hide()
         thisWindow = self
       }}
-      onShow={() => searchEntry.grab_focus()}
+      onShow={() => {
+        searchEntry.text = ''
+        searchEntry.grab_focus()
+      }}
     >
       <box orientation={Gtk.Orientation.VERTICAL}>
         <box class="SearchBar">
