@@ -72,13 +72,14 @@ autocmd FileType c,asm nnoremap <F5> :!gcc -o %:r % && ./%:r<CR>
 autocmd FileType cpp nnoremap <F5> :!g++ -o %:r % && ./%:r<CR>
 autocmd FileType python nnoremap <F5> :!python3 %<CR>
 autocmd FileType tex nnoremap <F5> :silent !lualatex %<CR>
+autocmd FileType markdown nnoremap <F5> :silent !pandoc % -o %:r.html -c %:r.css -s --mathjax<CR>
 
 " Maps and unmaps for non-programming languages
-autocmd FileType html iunmap '
-autocmd FileType tex iunmap '
+autocmd FileType tex,markdown,html iunmap '
+autocmd FileType markdown inoremap ` ``<left>
+autocmd FileType tex,markdown inoremap $ $$<left>
 autocmd FileType tex iunmap {<CR>
 autocmd FileType tex inoremap " ``"<left>
-autocmd FileType tex inoremap $ $$<left>
 
 " 2-space tab for certain laguages
 autocmd FileType html,css,javascript,typescript,typescriptreact,tex set tabstop=2

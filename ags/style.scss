@@ -235,3 +235,11 @@ popover > * {
 }
 // }}}
 
+.NotifCenter {
+  background-color: rgba($base, $bg-alpha);
+
+  .NotifBox {
+    background: transparent;
+  }
+}
+

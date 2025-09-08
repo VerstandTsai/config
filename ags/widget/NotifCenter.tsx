@@ -25,6 +25,7 @@ function NotifBox(notif: Notifd.Notification) {
 function NotifWindow(gdkmonitor: Gdk.Monitor) {
   return (
     <window
+      layer={Astal.Layer.OVERLAY}
       visible
       name="notifwindow"
       class="NotifWindow"
@@ -57,12 +58,12 @@ export default function NotifCenter(gdkmonitor: Gdk.Monitor) {
       application={app}
       $={(self) => {
         thisWindow = self
-        self.marginRight = -576
+        self.marginRight = -578
       }}
     >
       <Gtk.EventControllerMotion
         onEnter={() => thisWindow.marginRight = 0}
-        onLeave={() => thisWindow.marginRight = -576}
+        onLeave={() => thisWindow.marginRight = -578}
       />
       <scrolledwindow
         hscrollbarPolicy={Gtk.PolicyType.NEVER}

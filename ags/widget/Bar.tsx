@@ -1,8 +1,8 @@
 import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
-import { exec } from "ags/process"
+import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
-import { createState, createBinding, For } from "ags"
+import { createBinding, For } from "ags"
 import Hyprland from "gi://AstalHyprland"
 import Tray from "gi://AstalTray"
 import Wp from "gi://AstalWp"
@@ -14,13 +14,13 @@ function Start() {
       󰣇
       <popover>
         <box class="PowerMenu">
-          <button class="PowerOff" onClicked={() => exec("poweroff")}>
+          <button class="PowerOff" onClicked={() => execAsync("poweroff")}>
             <image iconName="system-shutdown-symbolic" pixelSize={64} />
           </button>
-          <button class="Reboot" onClicked={() => exec("reboot")}>
+          <button class="Reboot" onClicked={() => execAsync("reboot")}>
             <image iconName="system-reboot-symbolic" pixelSize={64} />
           </button>
-          <button class="Lock" onClicked={() => exec("hyprlock")}>
+          <button class="Lock" onClicked={() => execAsync("hyprlock")}>
             <image iconName="system-lock-screen-symbolic" pixelSize={64} />
           </button>
         </box>
@@ -120,14 +120,14 @@ function BatteryLevel() {
   const battery = Battery.get_default()
   const percentage = createBinding(battery, "percentage")
   const label = percentage((value) => ` ${Math.floor(value * 100)}%`)
-  const [warned, setWarned] = createState(false)
+  let warned = false
   percentage.subscribe(() => {
     if (percentage.get() <= 0.2) {
-      if (!warned.get()) {
-        setWarned(true)
-        exec(["notify-send", "Low Battery", "Please charge the laptop."])
+      if (!warned) {
+        warned = true
+        execAsync(["notify-send", "低電量警告", "請為您的筆電充電"])
       }
-    } else { setWarned(false) }
+    } else warned = false
   })
 
   return (
