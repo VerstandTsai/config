@@ -220,6 +220,11 @@ popover > * {
   border: solid rgba($text, 0.2) 1px;
   font-size: 16px;
   color: $text;
+  transition: all ease 200ms;
+
+  &:hover {
+    border: solid rgba($text, 0.5) 1px;
+  }
 
   .NotifMeta {
     label {
