@@ -72,7 +72,7 @@ autocmd FileType c,asm nnoremap <F5> :!gcc -o %:r % && ./%:r<CR>
 autocmd FileType cpp nnoremap <F5> :!g++ -o %:r % && ./%:r<CR>
 autocmd FileType python nnoremap <F5> :!python3 %<CR>
 autocmd FileType tex nnoremap <F5> :silent !lualatex %<CR>
-autocmd FileType markdown nnoremap <F5> :silent !pandoc % -o %:r.html -c %:r.css -s --mathjax<CR>
+autocmd FileType markdown nnoremap <F5> :silent !pandoc % -o %:r.html -s -c ~/Templates/css/markdown.css --mathjax<CR>
 
 " Maps and unmaps for non-programming languages
 autocmd FileType tex,markdown,html iunmap '
