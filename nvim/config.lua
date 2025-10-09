@@ -9,6 +9,10 @@ vim.opt.termguicolors = true
 require("catppuccin").setup({
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
     transparent_background = true, -- disables setting the background color.
+    float = {
+        transparent = true, -- enable transparent floating windows
+        solid = false, -- use solid styling for floating windows, see |winborder|
+    },
     custom_highlights = function (colors)
         return {
             LineNr = { fg = colors.overlay1 },
@@ -93,7 +97,7 @@ require('lualine').setup()
 
 -- bufferline.nvim
 require("bufferline").setup({
-    highlights = require("catppuccin.groups.integrations.bufferline").get(),
+    highlights = require("catppuccin.special.bufferline").get_theme(),
     options = {
         indicator = {
             style = 'underline'
