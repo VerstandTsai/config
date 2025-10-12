@@ -8,7 +8,6 @@ Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug '3rd/image.nvim', {'commit': '21909e3eb03bc738cce497f45602bf157b396672'}
 call plug#end()
 
 " Line numbers

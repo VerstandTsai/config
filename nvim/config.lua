@@ -116,8 +116,3 @@ require("bufferline").setup({
 -- indent-blankline.nvim
 require("ibl").setup()
 
--- image.nvim
-require("image").setup({
-    processor = "magick_cli"
-})
-
