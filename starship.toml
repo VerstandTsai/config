@@ -18,7 +18,7 @@ $git_status\
 $python\
 [](fg:sky bg:teal)\
 $time\
-[ ](fg:teal)\
+[](fg:teal)\
 $line_break\
 ╰─$character"""
 
