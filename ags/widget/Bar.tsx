@@ -80,18 +80,16 @@ function Time() {
 
 function SysTray() {
   const tray = Tray.get_default()
-  const popmenu = (item: Tray.TrayItem) => {
-    const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
-    popover.insert_action_group("dbusmenu", item.actionGroup)
-    return popover
-  }
 
   return (
     <box class="SysTray">
       <For each={createBinding(tray, "items")}>
         {(item: Tray.TrayItem) =>
-          <menubutton visible={createBinding(item, "status")((status) => !!status)}>
-            {popmenu(item)}
+          <menubutton
+            visible={createBinding(item, "status")((status) => !!status)}
+            menuModel={item.menuModel}
+            $={(self) => self.insert_action_group("dbusmenu", item.action_group)}
+          >
             <image gicon={createBinding(item, "gicon")} />
           </menubutton>
         }
