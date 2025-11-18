@@ -8,5 +8,7 @@
 !ags/**
 !fontconfig
 !fontconfig/**
+!ghostty
+!ghostty/**
 !starship.toml
 
