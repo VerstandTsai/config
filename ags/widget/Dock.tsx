@@ -8,7 +8,7 @@ export default function Dock(gdkmonitor: Gdk.Monitor) {
     "firefox",
     "thunderbird",
     "discord",
-    "kitty",
+    "ghostty",
     "neovim",
     "vlc",
     "obs",
