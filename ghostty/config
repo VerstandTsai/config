@@ -50,5 +50,5 @@
 
 theme = Catppuccin Macchiato
 background-opacity = 0.8
-mouse-scroll-multiplier = precision:0.5,discrete:1
+mouse-scroll-multiplier = precision:0.5
 
