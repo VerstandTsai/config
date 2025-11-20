@@ -52,4 +52,5 @@ theme = Catppuccin Macchiato
 background-opacity = 0.8
 mouse-scroll-multiplier = precision:0.5
 custom-shader = shaders/retro-terminal.glsl
+shell-integration-features = no-cursor
 
