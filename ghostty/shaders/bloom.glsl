@@ -34,7 +34,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         threshold(p+vec2(-1,  1), a) * 0.0625 +
         threshold(p+vec2( 1, -1), a) * 0.0625 +
         threshold(p+vec2(-1, -1), a) * 0.0625;
-    vec3 bloomed = mix(rgb2yuv(color.rgb), bloom, 0.75);
+    vec3 bloomed = mix(rgb2yuv(color.rgb), bloom*2, 0.75);
     if (bloomed.x < yuv.x) bloomed = yuv;
     fragColor = vec4(yuv2rgb(bloomed), color.a);
 }
