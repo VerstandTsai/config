@@ -20,7 +20,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3 yuv = rgb2yuv(color.rgb);
     float pi = radians(180);
     float t = pi * uv.y + iTime;
-    yuv.x *= mix(1, 0.5 - atan(tan(t)) / pi, 0.25);
+    yuv.x *= mix(1, 0.5 - atan(tan(t)) / pi, 0.5);
     fragColor = vec4(yuv2rgb(yuv), color.a);
 }
 
