@@ -53,6 +53,7 @@ background-opacity = 0.8
 mouse-scroll-multiplier = precision:0.5
 shell-integration-features = no-cursor
 custom-shader = shaders/scanline.glsl
+custom-shader = shaders/rolling.glsl
 custom-shader = shaders/bloom.glsl
 custom-shader = shaders/curvature.glsl
 
