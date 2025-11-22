@@ -19,6 +19,9 @@ set fillchars=eob:\
 " No line wrap
 set nowrap
 
+" Set the number of lines/columns to scroll with mouse
+set mousescroll=ver:1,hor:1
+
 " 4-space tab
 set tabstop=4
 set shiftwidth=4
@@ -26,6 +29,7 @@ set shiftwidth=4
 " Convert tab to spaces
 set expandtab
 
+" Triple braces folds
 set foldmethod=marker
 
 " Highlight trailing spaces
