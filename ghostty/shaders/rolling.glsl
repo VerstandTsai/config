@@ -18,9 +18,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
     vec4 color = texture(iChannel0, uv);
     vec3 yuv = rgb2yuv(color.rgb);
-    float pi = radians(180);
-    float t = pi * uv.y + iTime;
-    yuv.x *= mix(1, 0.5 - atan(tan(t)) / pi, 0.5);
+    yuv.x *= mix(1, 1 - fract(uv.y + 0.25*iTime), 0.5);
     fragColor = vec4(yuv2rgb(yuv), color.a);
 }
 
