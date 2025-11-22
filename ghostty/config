@@ -54,7 +54,7 @@ mouse-scroll-multiplier = precision:0.5
 shell-integration-features = no-cursor
 custom-shader-animation = always
 custom-shader = shaders/scanline.glsl
-custom-shader = shaders/rolling.glsl
 custom-shader = shaders/bloom.glsl
+custom-shader = shaders/rolling.glsl
 custom-shader = shaders/curvature.glsl
 

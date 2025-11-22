@@ -16,7 +16,7 @@ vec3 yuv2rgb(vec3 yuv) {
 
 vec3 threshold(vec2 p, vec2 a) {
     vec3 yuv = rgb2yuv(texture(iChannel0, p/a).rgb);
-    return yuv.x > 0.1 ? yuv : vec3(0);
+    return yuv.x > 0.125 ? yuv : vec3(0);
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
@@ -34,8 +34,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         threshold(p+vec2(-1,  1), a) * 0.0625 +
         threshold(p+vec2( 1, -1), a) * 0.0625 +
         threshold(p+vec2(-1, -1), a) * 0.0625;
-    vec3 bloomed = mix(rgb2yuv(color.rgb), bloom*2, 0.75);
-    if (bloomed.x < yuv.x) bloomed = yuv;
-    fragColor = vec4(yuv2rgb(bloomed), color.a);
+    fragColor = vec4(yuv2rgb(yuv + bloom), color.a);
 }
 
