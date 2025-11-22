@@ -50,7 +50,6 @@
 
 theme = Catppuccin Macchiato
 background-opacity = 0.8
-mouse-scroll-multiplier = precision:0.5
 shell-integration-features = no-cursor
 custom-shader-animation = always
 custom-shader = shaders/scanline.glsl
