@@ -49,7 +49,7 @@
 # resize-overlay-duration = 4s 200ms
 
 theme = Catppuccin Macchiato
-background-opacity = 0.8
+background-opacity = 0.75
 shell-integration-features = no-cursor
 custom-shader-animation = always
 custom-shader = shaders/scanline.glsl
