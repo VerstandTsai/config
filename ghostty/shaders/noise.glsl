@@ -32,16 +32,16 @@ uint hash(uint x) {
     return x;
 }
 
-float rand(vec2 u) {
-    uvec2 v = floatBitsToUint(u);
-    return floatConstruct(hash(v.x ^ hash(v.y)));
+float rand(vec3 u) {
+    uvec3 v = floatBitsToUint(u);
+    return floatConstruct(hash(hash(hash(v.x) ^ v.y) ^ v.z));
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
     vec4 color = texture(iChannel0, uv);
     vec3 yuv = rgb2yuv(color.rgb);
-    yuv.x *= mix(1, rand(floor(fragCoord / 4) + iTime), 0.5);
+    yuv.x *= mix(1, rand(vec3(floor(fragCoord / 4), iTime)), 0.5);
     fragColor = vec4(yuv2rgb(yuv), color.a);
 }
 
