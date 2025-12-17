@@ -8,11 +8,11 @@ export default function Dock(gdkmonitor: Gdk.Monitor) {
     "firefox",
     "thunderbird",
     "discord",
-    "ghostty",
-    "neovim",
-    "vlc",
+    "spotify",
     "obs",
-    "steam"
+    "steam",
+    "vlc",
+    "ghostty",
   ].map((name) => apps.fuzzy_query(name)[0])
 
   return (
