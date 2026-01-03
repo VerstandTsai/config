@@ -11,6 +11,7 @@ export default function Wallpaper(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       anchor={Astal.WindowAnchor.NONE}
       application={app}
+      exclusivity={Astal.Exclusivity.IGNORE}
     >
       <image file="/home/verstand/.wallpaper" pixelSize={gdkmonitor.geometry.width} />
     </window>
