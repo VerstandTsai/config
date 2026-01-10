@@ -32,17 +32,17 @@ function Start() {
 function Workspaces() {
   const hypr = Hyprland.get_default()
   const workspaces = createBinding(hypr, "workspaces")
-  const findById = (id: number) => workspaces((wss) => wss.find((ws) => id === ws.id))
   const focused = createBinding(hypr, "focusedWorkspace")
+  const maxId = workspaces((wss) => Math.max(...(wss.map((ws) => ws.id))))
 
   return (
     <box class="Workspaces">
       {Array.from({length: 10}, (_, i) => i + 1).map((id) =>
         <revealer
           transitionType={Gtk.RevealerTransitionType.CROSSFADE}
-          revealChild={findById(id)((ws) => ws != undefined)}
+          revealChild={maxId((max) => id <= max + 1)}
         >
-          <button onClicked={() => findById(id).get()!.focus()}>
+          <button onClicked={() => hypr.dispatch("workspace", id.toString())}>
             <box class={focused((fws) => id === fws.id ? "focused" : "")} />
           </button>
         </revealer>
