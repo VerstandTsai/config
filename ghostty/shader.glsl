@@ -22,18 +22,20 @@ vec3 threshold(vec2 p, vec2 a) {
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 p = fragCoord;
     vec2 a = iResolution.xy;
-    vec4 color = texture(iChannel0, p/a);
-    vec3 yuv = rgb2yuv(color.rgb);
+    vec2 uv = p / a;
+    vec4 color = texture(iChannel0, uv);
     vec3 bloom =
-        threshold(p, a) * 0.25 +
-        threshold(p+vec2( 1,  0), a) * 0.125 +
-        threshold(p+vec2(-1,  0), a) * 0.125 +
-        threshold(p+vec2( 0,  1), a) * 0.125 +
-        threshold(p+vec2( 0, -1), a) * 0.125 +
-        threshold(p+vec2( 1,  1), a) * 0.0625 +
-        threshold(p+vec2(-1,  1), a) * 0.0625 +
-        threshold(p+vec2( 1, -1), a) * 0.0625 +
-        threshold(p+vec2(-1, -1), a) * 0.0625;
+        threshold(p, a) / 4 +
+        threshold(p+vec2( 1,  0), a) / 8 +
+        threshold(p+vec2(-1,  0), a) / 8 +
+        threshold(p+vec2( 0,  1), a) / 8 +
+        threshold(p+vec2( 0, -1), a) / 8 +
+        threshold(p+vec2( 1,  1), a) / 16 +
+        threshold(p+vec2(-1,  1), a) / 16 +
+        threshold(p+vec2( 1, -1), a) / 16 +
+        threshold(p+vec2(-1, -1), a) / 16;
+    vec3 yuv = rgb2yuv(color.rgb);
+    yuv.x *= mix(1, sin(2048 * uv.y), 0.25);
     fragColor = vec4(yuv2rgb(yuv + bloom), color.a);
 }
 
