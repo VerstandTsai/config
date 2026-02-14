@@ -51,6 +51,5 @@
 theme = Catppuccin Macchiato
 background-opacity = 0.75
 shell-integration-features = no-cursor
-custom-shader-animation = always
 custom-shader = shader.glsl
 
