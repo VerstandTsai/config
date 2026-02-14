@@ -37,6 +37,7 @@ vim.lsp.config('lua_ls', {
 -- Keymaps
 vim.keymap.set('n', '<a-,>', ':bp<cr>', { silent = true })
 vim.keymap.set('n', '<a-.>', ':bn<cr>', { silent = true })
+vim.keymap.set('n', '<a-q>', ':bp|sp|bn|bd<cr>', { silent = true })
 for _, x in ipairs({'h', 'j', 'k', 'l'}) do
     vim.keymap.set('n', '<a-' .. x .. '>', '<c-w>' .. x)
 end
