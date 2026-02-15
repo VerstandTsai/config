@@ -28,7 +28,7 @@ vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
 
 -- LSP
-vim.lsp.enable({ 'lua_ls' })
+vim.lsp.enable({ 'lua_ls', 'cssls' })
 vim.lsp.config('lua_ls', {
     settings = {
         Lua = { workspace = { library = vim.api.nvim_get_runtime_file('', true) } }
@@ -46,7 +46,7 @@ end
 -- Auto-pairing
 local brackets = { '()', '[]', '{}', "''", '""' }
 
-local is_brackets = function ()
+local is_bracket = function ()
     local col = vim.api.nvim_win_get_cursor(0)[2]
     local line = vim.api.nvim_get_current_line()
     for _, x in ipairs(brackets) do
@@ -57,17 +57,17 @@ local is_brackets = function ()
     return false
 end
 
+local bracket_keymap = function (key, out)
+    vim.keymap.set('i', key, function ()
+        return is_bracket() and out or key
+    end, { expr = true })
+end
+
+bracket_keymap('<bs>', '<right><bs><bs>')
+bracket_keymap('<cr>', '<cr><esc>ko')
 for _, x in ipairs(brackets) do
     vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
 end
-
-vim.keymap.set('i', '<bs>', function ()
-    return is_brackets() and '<right><bs><bs>' or '<bs>'
-end, { expr = true })
-
-vim.keymap.set('i', '<cr>', function ()
-    return is_brackets() and '<cr><esc>ko' or '<cr>'
-end, { expr = true })
 
 -- Diagnostic hover
 vim.api.nvim_create_autocmd('CursorHold', {
