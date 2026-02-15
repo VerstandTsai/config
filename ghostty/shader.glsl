@@ -16,7 +16,7 @@ vec3 yuv2rgb(vec3 yuv) {
 
 vec3 threshold(vec2 p, vec2 a) {
     vec3 yuv = rgb2yuv(texture(iChannel0, p/a).rgb);
-    return yuv.x > 0.125 ? yuv : vec3(0);
+    return yuv.x > 0.0625 ? yuv : vec3(0);
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
