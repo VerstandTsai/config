@@ -123,9 +123,15 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 
 -- Setups
-require('ibl').setup()
 require('lualine').setup()
 require('nvim-tree').setup()
+
+require('ibl').setup({
+    indent = {
+        char = '▏',
+        highlight = 'NonText',
+    }
+})
 
 require('blink.cmp').setup({
     keymap = { preset = 'enter' },
