@@ -4,6 +4,7 @@ local gh = function (x)
 end
 
 vim.pack.add({
+    { src = gh('mason-org/mason.nvim') },
     { src = gh('neovim/nvim-lspconfig') },
     { src = gh('nvim-tree/nvim-tree.lua') },
     { src = gh('nvim-lualine/lualine.nvim') },
@@ -28,7 +29,7 @@ vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
 
 -- LSP
-vim.lsp.enable({ 'lua_ls', 'cssls' })
+vim.lsp.enable({ 'clangd', 'cssls', 'lua_ls', 'pyright', 'qmlls' })
 vim.lsp.config('lua_ls', {
     settings = {
         Lua = { workspace = { library = vim.api.nvim_get_runtime_file('', true) } }
@@ -124,6 +125,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 
 -- Setups
+require("mason").setup()
 require('lualine').setup()
 require('nvim-tree').setup()
 
