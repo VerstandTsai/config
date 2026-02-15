@@ -9,6 +9,7 @@ vim.pack.add({
     { src = gh('nvim-tree/nvim-tree.lua') },
     { src = gh('nvim-lualine/lualine.nvim') },
     { src = gh('nvim-tree/nvim-web-devicons') },
+    { src = gh('mason-org/mason-lspconfig.nvim') },
     { src = gh('lukas-reineke/indent-blankline.nvim') },
     { src = gh('catppuccin/nvim'), name = 'catppuccin' },
     { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
@@ -29,7 +30,6 @@ vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
 
 -- LSP
-vim.lsp.enable({ 'clangd', 'cssls', 'lua_ls', 'pyright', 'qmlls' })
 vim.lsp.config('lua_ls', {
     settings = {
         Lua = { workspace = { library = vim.api.nvim_get_runtime_file('', true) } }
@@ -125,9 +125,10 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 
 -- Setups
-require("mason").setup()
+require('mason').setup()
 require('lualine').setup()
 require('nvim-tree').setup()
+require('mason-lspconfig').setup()
 
 require('ibl').setup({
     indent = {
