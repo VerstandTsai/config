@@ -25,6 +25,7 @@ vim.opt.fillchars = { eob = ' ' }
 vim.opt.shiftwidth = 4
 vim.opt.updatetime = 200
 vim.opt.mousescroll = 'ver:1,hor:1'
+vim.opt.relativenumber = true
 
 -- LSP
 vim.lsp.enable({ 'lua_ls' })
