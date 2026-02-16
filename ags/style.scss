@@ -192,24 +192,6 @@ popover > * {
 }
 // }}}
 
-.Dock box { // {{{
-  margin-bottom: 16px;
-  padding: 4px;
-  border-radius: 24px;
-  background-color: rgba($base, $bg-alpha);
-
-  button {
-    padding: 4px;
-    margin: 8px;
-    border-radius: 16px;
-
-    &:hover {
-      background-color: rgba($text, 0.2);
-    }
-  }
-}
-// }}}
-
 .NotifBox { // {{{
   background-color: rgba($base, $bg-alpha);
   min-width: 512px;
@@ -244,12 +226,4 @@ popover > * {
   }
 }
 // }}}
-
-.NotifCenter {
-  background-color: rgba($base, $bg-alpha);
-
-  .NotifBox {
-    background: transparent;
-  }
-}
 
