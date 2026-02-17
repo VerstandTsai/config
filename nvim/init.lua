@@ -12,6 +12,7 @@ vim.pack.add({
     { src = gh('mason-org/mason-lspconfig.nvim') },
     { src = gh('catppuccin/nvim'), name = 'catppuccin' },
     { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
+    { src = gh('nvim-treesitter/nvim-treesitter'), version = 'master' },
     { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
 })
 
@@ -102,7 +103,7 @@ end
 set_indentation(4)
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'css', 'html', 'javascript', 'markdown', 'typescript', 'qml', 'tex' },
+    pattern = { 'css', 'html', 'javascript', 'markdown', 'qml', 'svelte', 'typescript', 'tex' },
     callback = function () set_indentation(2) end
 })
 
@@ -183,6 +184,10 @@ require('bufferline').setup({
             text = 'File Explorer',
         }},
     },
+})
+
+require('nvim-treesitter.configs').setup({
+    highlight = { enable = true }
 })
 
 vim.cmd.colorscheme('catppuccin')
