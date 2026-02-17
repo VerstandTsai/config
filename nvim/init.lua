@@ -70,7 +70,17 @@ for _, x in ipairs(brackets) do
     vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
 end
 
--- Diagnostic hover
+-- Diagnostics
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '',
+        }
+    }
+})
+
 vim.api.nvim_create_autocmd('CursorHold', {
     callback = function ()
         vim.diagnostic.open_float({
