@@ -25,7 +25,7 @@ vim.opt.expandtab = true
 vim.opt.winborder = 'rounded'
 vim.opt.fillchars = { eob = ' ' }
 vim.opt.shiftwidth = 4
-vim.opt.updatetime = 200
+vim.opt.updatetime = 500
 vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
 
