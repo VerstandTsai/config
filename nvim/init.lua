@@ -10,7 +10,6 @@ vim.pack.add({
     { src = gh('nvim-lualine/lualine.nvim') },
     { src = gh('nvim-tree/nvim-web-devicons') },
     { src = gh('mason-org/mason-lspconfig.nvim') },
-    { src = gh('lukas-reineke/indent-blankline.nvim') },
     { src = gh('catppuccin/nvim'), name = 'catppuccin' },
     { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
     { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
@@ -18,13 +17,12 @@ vim.pack.add({
 
 -- Options
 vim.opt.wrap = false
+vim.opt.list = true
 vim.opt.number = true
-vim.opt.tabstop = 4
 vim.opt.swapfile = false
 vim.opt.expandtab = true
 vim.opt.winborder = 'rounded'
 vim.opt.fillchars = { eob = ' ' }
-vim.opt.shiftwidth = 4
 vim.opt.updatetime = 500
 vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
@@ -91,6 +89,23 @@ vim.api.nvim_create_autocmd('CursorHold', {
     end
 })
 
+-- Indentation
+local set_indentation = function (size)
+    vim.opt.tabstop = size
+    vim.opt.shiftwidth = size
+    vim.opt.listchars = {
+        trail = '·',
+        leadmultispace = '▏' .. string.rep(' ', size - 1),
+    }
+end
+
+set_indentation(4)
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'css', 'html', 'javascript', 'markdown', 'typescript', 'qml', 'tex' },
+    callback = function () set_indentation(2) end
+})
+
 -- nvim-tree
 vim.api.nvim_create_autocmd('VimEnter', {
     callback = function ()
@@ -140,13 +155,6 @@ require('mason').setup()
 require('lualine').setup()
 require('nvim-tree').setup()
 require('mason-lspconfig').setup()
-
-require('ibl').setup({
-    indent = {
-        char = '▏',
-        highlight = 'NonText',
-    }
-})
 
 require('blink.cmp').setup({
     keymap = { preset = 'enter' },
