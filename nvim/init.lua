@@ -23,6 +23,7 @@ vim.opt.number = true
 vim.opt.swapfile = false
 vim.opt.expandtab = true
 vim.opt.winborder = 'rounded'
+vim.opt.clipboard = 'unnamedplus'
 vim.opt.fillchars = { eob = ' ' }
 vim.opt.updatetime = 500
 vim.opt.mousescroll = 'ver:1,hor:1'
