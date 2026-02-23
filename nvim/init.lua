@@ -28,6 +28,7 @@ vim.opt.fillchars = { eob = ' ' }
 vim.opt.updatetime = 500
 vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
+vim.opt.listchars:append({ trail = '·' })
 
 -- LSP
 vim.lsp.config('lua_ls', {
@@ -95,10 +96,7 @@ vim.api.nvim_create_autocmd('CursorHold', {
 local set_indentation = function (size)
     vim.opt.tabstop = size
     vim.opt.shiftwidth = size
-    vim.opt.listchars = {
-        trail = '·',
-        leadmultispace = '▏' .. string.rep(' ', size - 1),
-    }
+    vim.opt.listchars:append({ leadmultispace = '▏' .. string.rep(' ', size - 1) })
 end
 
 set_indentation(4)
