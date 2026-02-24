@@ -52,5 +52,5 @@ theme = Catppuccin Macchiato
 background-opacity = 0.75
 shell-integration-features = no-cursor
 custom-shader = shader.glsl
-font-family = "Noto Serif CJK TC"
+font-family = "Noto Sans CJK TC"
 
