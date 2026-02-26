@@ -25,7 +25,6 @@ vim.opt.expandtab = true
 vim.opt.winborder = 'rounded'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.fillchars = { eob = ' ' }
-vim.opt.updatetime = 500
 vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
 vim.opt.listchars:append({ trail = '·' })
@@ -83,7 +82,7 @@ vim.diagnostic.config({
     }
 })
 
-vim.api.nvim_create_autocmd('CursorHold', {
+vim.api.nvim_create_autocmd('CursorMoved', {
     callback = function ()
         vim.diagnostic.open_float({
             scope = 'cursor',
