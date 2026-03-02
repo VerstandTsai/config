@@ -101,7 +101,7 @@ end
 set_indentation(4)
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'css', 'html', 'javascript', 'markdown', 'qml', 'svelte', 'typescript', 'tex' },
+    pattern = { 'css', 'html', 'javascript', 'qml', 'svelte', 'typescript', 'tex' },
     callback = function () set_indentation(2) end
 })
 
