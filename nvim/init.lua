@@ -95,7 +95,6 @@ vim.api.nvim_create_autocmd('CursorMoved', {
 local set_indentation = function (size)
     vim.opt.tabstop = size
     vim.opt.shiftwidth = size
-    vim.opt.listchars:append({ leadmultispace = '▏' .. string.rep(' ', size - 1) })
 end
 
 set_indentation(4)
@@ -164,7 +163,10 @@ require('catppuccin').setup({
     transparent_background = true,
     float = { transparent = true },
     custom_highlights = function (colors)
-        return { LineNr = { fg = colors.overlay1 } }
+        return {
+            LineNr = { fg = colors.overlay1 },
+            Whitespace = { fg = colors.red },
+        }
     end,
 })
 
