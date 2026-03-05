@@ -104,6 +104,13 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function () set_indentation(2) end
 })
 
+-- Disable input method after leaving insert mode
+vim.api.nvim_create_autocmd('InsertLeave', {
+    callback = function ()
+        vim.system({'fcitx5-remote', '-c'})
+    end
+})
+
 -- nvim-tree
 vim.api.nvim_create_autocmd('VimEnter', {
     callback = function ()
