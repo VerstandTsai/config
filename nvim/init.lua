@@ -5,6 +5,7 @@ end
 
 vim.pack.add({
     { src = gh('mason-org/mason.nvim') },
+    { src = gh('nvim-lua/plenary.nvim') },
     { src = gh('neovim/nvim-lspconfig') },
     { src = gh('nvim-tree/nvim-tree.lua') },
     { src = gh('nvim-lualine/lualine.nvim') },
@@ -14,6 +15,7 @@ vim.pack.add({
     { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
     { src = gh('nvim-treesitter/nvim-treesitter'), version = 'master' },
     { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
+    { src = gh('nvim-telescope/telescope.nvim'), version = vim.version.range('*') },
 })
 
 -- Options
