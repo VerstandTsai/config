@@ -30,7 +30,7 @@ vim.opt.fillchars = { eob = ' ' }
 vim.opt.foldmethod = 'marker'
 vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.relativenumber = true
-vim.opt.listchars:append({ trail = '·' })
+vim.opt.listchars:append({ trail = '█' })
 
 -- LSP
 vim.lsp.config('lua_ls', {
