@@ -39,6 +39,9 @@ vim.lsp.config('lua_ls', {
     }
 })
 
+-- Redraw on every keypress
+vim.on_key(function () vim.cmd.redraw() end)
+
 -- Keymaps
 vim.keymap.set('n', '<a-u>', ':bp<cr>', { silent = true })
 vim.keymap.set('n', '<a-i>', ':bn<cr>', { silent = true })
