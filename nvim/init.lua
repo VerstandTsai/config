@@ -51,30 +51,38 @@ for _, x in ipairs({'h', 'j', 'k', 'l'}) do
 end
 
 -- Auto-pairing
-local brackets = { '()', '[]', '{}', "''", '""' }
-
-local is_bracket = function ()
-    local col = vim.api.nvim_win_get_cursor(0)[2]
-    local line = vim.api.nvim_get_current_line()
-    for _, x in ipairs(brackets) do
-        if x == line:sub(col, col+1) then
-            return true
-        end
+local autopair = function (brackets)
+    local bracket_keymap = function (key, out)
+        vim.keymap.set('i', key, function ()
+            local col = vim.api.nvim_win_get_cursor(0)[2]
+            local line = vim.api.nvim_get_current_line()
+            for _, x in ipairs(brackets) do
+                if x == line:sub(col, col+1) then
+                    return out
+                end
+            end
+            return key
+        end, { expr = true })
     end
-    return false
+
+    bracket_keymap('<bs>', '<right><bs><bs>')
+    bracket_keymap('<cr>', '<cr><esc>ko')
+    for _, x in ipairs(brackets) do
+        vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
+    end
 end
 
-local bracket_keymap = function (key, out)
-    vim.keymap.set('i', key, function ()
-        return is_bracket() and out or key
-    end, { expr = true })
-end
-
-bracket_keymap('<bs>', '<right><bs><bs>')
-bracket_keymap('<cr>', '<cr><esc>ko')
-for _, x in ipairs(brackets) do
-    vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
-end
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = '*',
+    callback = function (opts)
+        local brackets = {
+            ['default'] = { '()', '[]', '{}', "''", '""' },
+            ['markdown'] = { '()', '[]', '{}', "''", '""', '$$' },
+            ['tex'] = { '()', '[]', '{}', "`'", '$$' },
+        }
+        autopair(brackets[opts.match] or brackets['default'])
+    end
+})
 
 -- Diagnostics
 vim.diagnostic.config({
@@ -106,7 +114,7 @@ end
 set_indentation(4)
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'css', 'html', 'javascript', 'qml', 'svelte', 'typescript', 'tex' },
+    pattern = { 'css', 'html', 'javascript', 'qml', 'typescript', 'tex' },
     callback = function () set_indentation(2) end
 })
 
