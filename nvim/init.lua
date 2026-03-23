@@ -188,6 +188,7 @@ require('catppuccin').setup({
         return {
             LineNr = { fg = colors.overlay1 },
             Whitespace = { fg = colors.red },
+            ColorColumn = { bg = colors.peach },
         }
     end,
 })
