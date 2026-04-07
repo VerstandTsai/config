@@ -1,21 +1,21 @@
 -- Packages
 local gh = function (x)
-    return 'https://github.com/' .. x
+  return 'https://github.com/' .. x
 end
 
 vim.pack.add({
-    { src = gh('mason-org/mason.nvim') },
-    { src = gh('nvim-lua/plenary.nvim') },
-    { src = gh('neovim/nvim-lspconfig') },
-    { src = gh('nvim-tree/nvim-tree.lua') },
-    { src = gh('nvim-lualine/lualine.nvim') },
-    { src = gh('nvim-tree/nvim-web-devicons') },
-    { src = gh('mason-org/mason-lspconfig.nvim') },
-    { src = gh('catppuccin/nvim'), name = 'catppuccin' },
-    { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
-    { src = gh('nvim-treesitter/nvim-treesitter'), version = 'master' },
-    { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
-    { src = gh('nvim-telescope/telescope.nvim'), version = vim.version.range('*') },
+  { src = gh('mason-org/mason.nvim') },
+  { src = gh('nvim-lua/plenary.nvim') },
+  { src = gh('neovim/nvim-lspconfig') },
+  { src = gh('nvim-tree/nvim-tree.lua') },
+  { src = gh('nvim-lualine/lualine.nvim') },
+  { src = gh('nvim-tree/nvim-web-devicons') },
+  { src = gh('mason-org/mason-lspconfig.nvim') },
+  { src = gh('catppuccin/nvim'), name = 'catppuccin' },
+  { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
+  { src = gh('nvim-treesitter/nvim-treesitter'), version = 'master' },
+  { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
+  { src = gh('nvim-telescope/telescope.nvim'), version = vim.version.range('*') },
 })
 
 -- Options
@@ -35,9 +35,9 @@ vim.opt.listchars:append({ trail = '█' })
 
 -- LSP
 vim.lsp.config('lua_ls', {
-    settings = {
-        Lua = { workspace = { library = vim.api.nvim_get_runtime_file('', true) } }
-    }
+  settings = {
+    Lua = { workspace = { library = vim.api.nvim_get_runtime_file('', true) } }
+  }
 })
 
 -- Clear the screen on every keypress
@@ -48,119 +48,119 @@ vim.keymap.set('n', '<a-u>', ':bp<cr>', { silent = true })
 vim.keymap.set('n', '<a-i>', ':bn<cr>', { silent = true })
 vim.keymap.set('n', '<a-q>', ':bp|sp|bn|bd<cr>', { silent = true })
 for _, x in ipairs({'h', 'j', 'k', 'l'}) do
-    vim.keymap.set('n', '<a-' .. x .. '>', '<c-w>' .. x)
+  vim.keymap.set('n', '<a-' .. x .. '>', '<c-w>' .. x)
 end
 
 -- Auto-pairing
 local autopair = function (brackets)
-    local bracket_keymap = function (key, out)
-        vim.keymap.set('i', key, function ()
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            local line = vim.api.nvim_get_current_line()
-            for _, x in ipairs(brackets) do
-                if x == line:sub(col, col+1) then
-                    return out
-                end
-            end
-            return key
-        end, { expr = true })
-    end
+  local bracket_keymap = function (key, out)
+    vim.keymap.set('i', key, function ()
+      local col = vim.api.nvim_win_get_cursor(0)[2]
+      local line = vim.api.nvim_get_current_line()
+      for _, x in ipairs(brackets) do
+        if x == line:sub(col, col+1) then
+          return out
+        end
+      end
+      return key
+    end, { expr = true })
+  end
 
-    bracket_keymap('<bs>', '<right><bs><bs>')
-    bracket_keymap('<cr>', '<cr><esc>ko')
-    for _, x in ipairs(brackets) do
-        vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
-    end
+  bracket_keymap('<bs>', '<right><bs><bs>')
+  bracket_keymap('<cr>', '<cr><esc>ko')
+  for _, x in ipairs(brackets) do
+    vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
+  end
 end
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = '*',
-    callback = function (opts)
-        local brackets = {
-            ['default'] = { '()', '[]', '{}', "''", '""' },
-            ['markdown'] = { '()', '[]', '{}', "''", '""', '$$' },
-            ['tex'] = { '()', '[]', '{}', "`'", '$$' },
-        }
-        autopair(brackets[opts.match] or brackets['default'])
-    end
+  pattern = '*',
+  callback = function (opts)
+    local brackets = {
+      ['default'] = { '()', '[]', '{}', "''", '""' },
+      ['markdown'] = { '()', '[]', '{}', "''", '""', '$$' },
+      ['tex'] = { '()', '[]', '{}', "`'", '$$' },
+    }
+    autopair(brackets[opts.match] or brackets['default'])
+  end
 })
 
 -- Diagnostics
 vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
-            [vim.diagnostic.severity.INFO] = '',
-            [vim.diagnostic.severity.HINT] = '󰌶',
-        }
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '󰌶',
     }
+  }
 })
 
 vim.api.nvim_create_autocmd('CursorMoved', {
-    callback = function ()
-        vim.diagnostic.open_float({
-            scope = 'cursor',
-            focusable = false,
-        })
-    end
+  callback = function ()
+    vim.diagnostic.open_float({
+      scope = 'cursor',
+      focusable = false,
+    })
+  end
 })
 
 -- Indentation
 local set_indentation = function (size)
-    vim.opt.tabstop = size
-    vim.opt.shiftwidth = size
+  vim.opt.tabstop = size
+  vim.opt.shiftwidth = size
 end
 
 set_indentation(4)
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'css', 'html', 'javascript', 'qml', 'typescript', 'tex' },
-    callback = function () set_indentation(2) end
+  pattern = { 'lua', 'css', 'html', 'javascript', 'typescript', 'tex' },
+  callback = function () set_indentation(2) end
 })
 
 -- nvim-tree
 vim.api.nvim_create_autocmd('VimEnter', {
-    callback = function ()
-        require('nvim-tree.api').tree.open()
-    end
+  callback = function ()
+    require('nvim-tree.api').tree.open()
+  end
 })
 
 vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
-    nested = false,
-    callback = function(e)
-        local tree = require('nvim-tree.api').tree
+  nested = false,
+  callback = function(e)
+    local tree = require('nvim-tree.api').tree
 
-        -- Nothing to do if tree is not opened
-        if not tree.is_visible() then
-            return
-        end
-
-        -- How many focusable windows do we have? (excluding e.g. incline status window)
-        local winCount = 0
-        for _,winId in ipairs(vim.api.nvim_list_wins()) do
-            if vim.api.nvim_win_get_config(winId).focusable then
-                winCount = winCount + 1
-            end
-        end
-
-        -- We want to quit and only one window besides tree is left
-        if e.event == 'QuitPre' and winCount == 2 then
-            vim.api.nvim_cmd({cmd = 'qall'}, {})
-        end
-
-        -- :bd was probably issued an only tree window is left
-        -- Behave as if tree was closed (see `:h :bd`)
-        if e.event == 'BufEnter' and winCount == 1 then
-            -- Required to avoid "Vim:E444: Cannot close last window"
-            vim.defer_fn(function()
-                -- close nvim-tree: will go to the last buffer used before closing
-                tree.toggle({find_file = true, focus = true})
-                -- re-open nivm-tree
-                tree.toggle({find_file = true, focus = false})
-            end, 10)
-        end
+    -- Nothing to do if tree is not opened
+    if not tree.is_visible() then
+      return
     end
+
+    -- How many focusable windows do we have? (excluding e.g. incline status window)
+    local winCount = 0
+    for _,winId in ipairs(vim.api.nvim_list_wins()) do
+      if vim.api.nvim_win_get_config(winId).focusable then
+        winCount = winCount + 1
+      end
+    end
+
+    -- We want to quit and only one window besides tree is left
+    if e.event == 'QuitPre' and winCount == 2 then
+      vim.api.nvim_cmd({cmd = 'qall'}, {})
+    end
+
+    -- :bd was probably issued an only tree window is left
+    -- Behave as if tree was closed (see `:h :bd`)
+    if e.event == 'BufEnter' and winCount == 1 then
+      -- Required to avoid "Vim:E444: Cannot close last window"
+      vim.defer_fn(function()
+        -- close nvim-tree: will go to the last buffer used before closing
+        tree.toggle({find_file = true, focus = true})
+        -- re-open nivm-tree
+        tree.toggle({find_file = true, focus = false})
+      end, 10)
+    end
+  end
 })
 
 -- Setups
@@ -170,46 +170,46 @@ require('nvim-tree').setup()
 require('mason-lspconfig').setup()
 
 require('blink.cmp').setup({
-    keymap = { preset = 'enter' },
-    signature = { enabled = true },
+  keymap = { preset = 'enter' },
+  signature = { enabled = true },
 })
 
 require('catppuccin').setup({
-    transparent_background = true,
-    float = { transparent = true },
-    custom_highlights = function (colors)
-        return {
-            LineNr = { fg = colors.overlay1 },
-            Whitespace = { fg = colors.red },
-            ColorColumn = { bg = colors.peach },
-        }
-    end,
+  transparent_background = true,
+  float = { transparent = true },
+  custom_highlights = function (colors)
+    return {
+      LineNr = { fg = colors.overlay1 },
+      Whitespace = { fg = colors.red },
+      ColorColumn = { bg = colors.peach },
+    }
+  end,
 })
 
 local icons = {
-    ['error'] = '',
-    ['warning'] = '',
-    ['info'] = '',
-    ['hint'] = '󰌶',
+  ['error'] = '',
+  ['warning'] = '',
+  ['info'] = '',
+  ['hint'] = '󰌶',
 }
 
 require('bufferline').setup({
-    highlights = require('catppuccin.special.bufferline').get_theme(),
-    options = {
-        indicator = { style = 'underline' },
-        diagnostics = 'nvim_lsp',
-        diagnostics_indicator = function(count, level, _, _)
-            return ' ' .. icons[level] .. ' ' .. count
-        end,
-        offsets = {{
-            filetype = 'NvimTree',
-            text = 'File Explorer',
-        }},
-    },
+  highlights = require('catppuccin.special.bufferline').get_theme(),
+  options = {
+    indicator = { style = 'underline' },
+    diagnostics = 'nvim_lsp',
+    diagnostics_indicator = function(count, level, _, _)
+      return ' ' .. icons[level] .. ' ' .. count
+    end,
+    offsets = {{
+      filetype = 'NvimTree',
+      text = 'File Explorer',
+    }},
+  },
 })
 
 require('nvim-treesitter.configs').setup({
-    highlight = { enable = true }
+  highlight = { enable = true }
 })
 
 vim.cmd.colorscheme('catppuccin')
