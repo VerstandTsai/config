@@ -11,9 +11,9 @@ vim.pack.add({
   { src = gh('nvim-lualine/lualine.nvim') },
   { src = gh('nvim-tree/nvim-web-devicons') },
   { src = gh('mason-org/mason-lspconfig.nvim') },
+  { src = gh('nvim-treesitter/nvim-treesitter') },
   { src = gh('catppuccin/nvim'), name = 'catppuccin' },
   { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
-  { src = gh('nvim-treesitter/nvim-treesitter'), version = 'master' },
   { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
   { src = gh('nvim-telescope/telescope.nvim'), version = vim.version.range('*') },
 })
@@ -32,6 +32,24 @@ vim.opt.mousescroll = 'ver:1,hor:1'
 vim.opt.colorcolumn = '80'
 vim.opt.relativenumber = true
 vim.opt.listchars:append({ trail = '█' })
+
+-- Treesitter
+local langs = {
+  'haskell',
+  'python',
+  'c',
+  'cpp',
+  'rust',
+  'html',
+  'css',
+  'javascript',
+  'typescript'
+}
+require('nvim-treesitter').install(langs)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = langs,
+  callback = function() vim.treesitter.start() end,
+})
 
 -- LSP
 vim.lsp.config('lua_ls', {
@@ -86,13 +104,20 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Diagnostics
+local icons = {
+  ['error'] = '',
+  ['warning'] = '',
+  ['info'] = '',
+  ['hint'] = '󰌶',
+}
+
 vim.diagnostic.config({
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.INFO] = '',
-      [vim.diagnostic.severity.HINT] = '󰌶',
+      [vim.diagnostic.severity.ERROR] = icons['error'],
+      [vim.diagnostic.severity.WARN] = icons['warning'],
+      [vim.diagnostic.severity.INFO] = icons['info'],
+      [vim.diagnostic.severity.HINT] = icons['hint'],
     }
   }
 })
@@ -186,13 +211,6 @@ require('catppuccin').setup({
   end,
 })
 
-local icons = {
-  ['error'] = '',
-  ['warning'] = '',
-  ['info'] = '',
-  ['hint'] = '󰌶',
-}
-
 require('bufferline').setup({
   highlights = require('catppuccin.special.bufferline').get_theme(),
   options = {
@@ -206,10 +224,6 @@ require('bufferline').setup({
       text = 'File Explorer',
     }},
   },
-})
-
-require('nvim-treesitter.configs').setup({
-  highlight = { enable = true }
 })
 
 vim.cmd.colorscheme('catppuccin')
