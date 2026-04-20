@@ -7,7 +7,7 @@ uniform sampler2D tex;
 
 void main() {
     vec4 color = texture(tex, v_texcoord);
-    float lightness = (2.0*color.r + 4.0*color.g + color.b) / 7.0;
-	fragColor = vec4(lightness, lightness, lightness, 1.0);
+    float lightness = (0.2126*color.r + 0.7152*color.g + 0.0722*color.b);
+    fragColor = vec4(lightness, lightness, lightness, 1.0);
 }
 

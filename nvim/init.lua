@@ -40,6 +40,7 @@ local langs = {
   'c',
   'cpp',
   'rust',
+  'markdown',
   'html',
   'css',
   'javascript',

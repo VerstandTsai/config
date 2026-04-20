@@ -53,4 +53,5 @@ background-opacity = 0.75
 shell-integration-features = no-cursor
 custom-shader = shader.glsl
 font-family = "Noto Sans CJK TC"
+font-size = 13
 
