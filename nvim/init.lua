@@ -97,7 +97,8 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function (opts)
     local brackets = {
       ['default'] = { '()', '[]', '{}', "''", '""' },
-      ['markdown'] = { '()', '[]', '{}', "''", '""', '$$' },
+      ['haskell'] = { '()', '[]', '{}', '""', '$$' },
+      ['markdown'] = { '()', '[]', '{}', '""', '$$' },
       ['tex'] = { '()', '[]', '{}', "`'", '$$' },
     }
     autopair(brackets[opts.match] or brackets['default'])
