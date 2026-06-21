@@ -26,7 +26,9 @@ hl.on("hyprland.shutdown", function()
   os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
 end)
 
-hl.env("PATH", os.getenv("PATH") .. ":" .. os.getenv("HOME") .. "/.local/bin")
+local local_bin = ":" .. os.getenv("HOME") .. "/.local/bin"
+local cargo_bin = ":" .. os.getenv("HOME") .. "/.cargo/bin"
+hl.env("PATH", os.getenv("PATH") .. cargo_bin .. local_bin)
 hl.env("LANG", "zh_TW.UTF-8")
 hl.env("GSK_RENDERER", "vulkan")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
@@ -141,6 +143,7 @@ hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_
 hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("hyprlock"), { locked = true })
 for i = 1, 10 do
   local key = i % 10
   hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
