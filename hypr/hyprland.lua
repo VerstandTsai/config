@@ -9,6 +9,7 @@ local terminal = "ghostty --gtk-single-instance=true"
 local menu = "ags toggle launcher"
 
 hl.on("hyprland.start", function ()
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
   hl.exec_cmd("hyprlock")
   hl.exec_cmd(terminal .. " --quit-after-last-window-closed=false --initial-window=false")
   hl.exec_cmd("ags run")
@@ -21,6 +22,11 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("firefox", { workspace = 3 })
 end)
 
+hl.on("hyprland.shutdown", function()
+  os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
+end)
+
+hl.env("PATH", os.getenv("PATH") .. ":" .. os.getenv("HOME") .. "/.local/bin")
 hl.env("LANG", "zh_TW.UTF-8")
 hl.env("GSK_RENDERER", "vulkan")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
