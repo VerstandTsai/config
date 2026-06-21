@@ -69,7 +69,12 @@ hl.config({
       natural_scroll = true,
       scroll_factor = 0.2,
     }
-  }
+  },
+  gestures = {
+    workspace_swipe_direction_lock = false,
+    workspace_swipe_forever = true,
+    workspace_swipe_use_r = true,
+  },
 })
 
 hl.gesture({
