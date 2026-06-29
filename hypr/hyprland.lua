@@ -5,13 +5,13 @@ hl.monitor({
   scale = "1"
 })
 
-local terminal = "ghostty --gtk-single-instance=true"
+local terminal = "kitty"
 local menu = "ags toggle launcher"
 
 hl.on("hyprland.start", function ()
   hl.exec_cmd("systemctl --user start hyprland-session.target")
   hl.exec_cmd("hyprlock")
-  hl.exec_cmd(terminal .. " --quit-after-last-window-closed=false --initial-window=false")
+  hl.exec_cmd(terminal)
   hl.exec_cmd("kitten panel --layer top -o window_padding_width=4 zsh -c 'status-bar $COLUMNS'")
   hl.exec_cmd("kitten panel --edge background sh -c 'kitten icat -n ~/.wallpaper && echo -e \"\\x1b[3+T\" && sleep infinity'")
   hl.exec_cmd("ags run")
