@@ -30,7 +30,7 @@ vim.opt.fillchars = { eob = ' ' }
 vim.opt.foldmethod = 'marker'
 vim.opt.colorcolumn = '80'
 vim.opt.relativenumber = true
-vim.opt.listchars:append({ trail = '█' })
+vim.opt.listchars:append({ trail = ' ' })
 
 -- Treesitter
 local langs = {
@@ -43,7 +43,8 @@ local langs = {
   'html',
   'css',
   'javascript',
-  'typescript'
+  'typescript',
+  'wgsl'
 }
 require('nvim-treesitter').install(langs)
 vim.api.nvim_create_autocmd('FileType', {
@@ -206,7 +207,7 @@ require('catppuccin').setup({
   custom_highlights = function (colors)
     return {
       LineNr = { fg = colors.overlay1 },
-      Whitespace = { fg = colors.red },
+      Whitespace = { bg = colors.red },
       ColorColumn = { bg = colors.peach },
     }
   end,
