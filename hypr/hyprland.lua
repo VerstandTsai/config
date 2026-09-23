@@ -77,6 +77,9 @@ hl.config({
     workspace_swipe_forever = true,
     workspace_swipe_use_r = true,
   },
+  debug = {
+    disable_logs = false,
+  },
 })
 
 hl.gesture({
@@ -155,8 +158,8 @@ hl.window_rule({
   name = "fullscreen-apps",
   match = {
     class = "^((東方紅魔郷)|(th[0-9]+))\\.exe$",
-    fullscreen = true
-  }
+  },
+  fullscreen = true,
 })
 
 hl.layer_rule({ match = { namespace = "selection" }, no_anim = true })
