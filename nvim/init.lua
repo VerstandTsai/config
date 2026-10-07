@@ -5,17 +5,14 @@ end
 
 vim.pack.add({
   { src = gh('mason-org/mason.nvim') },
-  { src = gh('nvim-lua/plenary.nvim') },
-  { src = gh('neovim/nvim-lspconfig') },
+  { src = gh('neanias/everforest-nvim') },
   { src = gh('nvim-tree/nvim-tree.lua') },
   { src = gh('nvim-lualine/lualine.nvim') },
   { src = gh('nvim-tree/nvim-web-devicons') },
   { src = gh('mason-org/mason-lspconfig.nvim') },
   { src = gh('nvim-treesitter/nvim-treesitter') },
-  { src = gh('catppuccin/nvim'), name = 'catppuccin' },
   { src = gh('saghen/blink.cmp'), version = vim.version.range('*') },
   { src = gh('akinsho/bufferline.nvim'), version = vim.version.range('*') },
-  { src = gh('nvim-telescope/telescope.nvim'), version = vim.version.range('*') },
 })
 
 -- Options
@@ -32,6 +29,9 @@ vim.opt.colorcolumn = '80'
 vim.opt.relativenumber = true
 vim.opt.listchars:append({ trail = ' ' })
 
+-- Highlight trailing whitespaces
+vim.fn.matchadd('CurSearch', '\\s\\+$')
+
 -- Treesitter
 local langs = {
   'haskell',
@@ -44,7 +44,6 @@ local langs = {
   'css',
   'javascript',
   'typescript',
-  'wgsl'
 }
 require('nvim-treesitter').install(langs)
 vim.api.nvim_create_autocmd('FileType', {
@@ -162,7 +161,8 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
       return
     end
 
-    -- How many focusable windows do we have? (excluding e.g. incline status window)
+    -- How many focusable windows do we have?
+    -- (excluding e.g. incline status window)
     local winCount = 0
     for _,winId in ipairs(vim.api.nvim_list_wins()) do
       if vim.api.nvim_win_get_config(winId).focusable then
@@ -190,6 +190,14 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 
 -- Setups
+
+require('everforest').setup({
+  background = 'hard',
+  transparent_background_level = 2,
+})
+
+vim.cmd.colorscheme('everforest')
+
 require('mason').setup()
 require('lualine').setup()
 require('nvim-tree').setup()
@@ -200,20 +208,7 @@ require('blink.cmp').setup({
   signature = { enabled = true },
 })
 
-require('catppuccin').setup({
-  transparent_background = true,
-  float = { transparent = true },
-  custom_highlights = function (colors)
-    return {
-      LineNr = { fg = colors.overlay1 },
-      Whitespace = { bg = colors.red },
-      ColorColumn = { bg = colors.peach },
-    }
-  end,
-})
-
 require('bufferline').setup({
-  highlights = require('catppuccin.special.bufferline').get_theme(),
   options = {
     indicator = { style = 'underline' },
     diagnostics = 'nvim_lsp',
@@ -226,6 +221,4 @@ require('bufferline').setup({
     }},
   },
 })
-
-vim.cmd.colorscheme('catppuccin')
 
