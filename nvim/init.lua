@@ -5,6 +5,7 @@ end
 
 vim.pack.add({
   { src = gh('mason-org/mason.nvim') },
+  { src = gh('neovim/nvim-lspconfig') },
   { src = gh('neanias/everforest-nvim') },
   { src = gh('nvim-tree/nvim-tree.lua') },
   { src = gh('nvim-lualine/lualine.nvim') },
@@ -40,6 +41,7 @@ local langs = {
   'cpp',
   'rust',
   'markdown',
+  'latex',
   'html',
   'css',
   'javascript',
