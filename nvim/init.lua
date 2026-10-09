@@ -72,38 +72,43 @@ for _, x in ipairs({'h', 'j', 'k', 'l'}) do
 end
 
 -- Auto-pairing
-local autopair = function (brackets)
-  local bracket_keymap = function (key, out)
-    vim.keymap.set('i', key, function ()
-      local col = vim.api.nvim_win_get_cursor(0)[2]
-      local line = vim.api.nvim_get_current_line()
-      for _, x in ipairs(brackets) do
-        if x == line:sub(col, col+1) then
-          return out
-        end
-      end
-      return key
-    end, { expr = true })
-  end
 
-  bracket_keymap('<bs>', '<right><bs><bs>')
-  bracket_keymap('<cr>', '<cr><esc>ko')
-  for _, x in ipairs(brackets) do
-    vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
-  end
-end
+vim.g.brackets = {}
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
   callback = function (opts)
-    local brackets = {
-      ['default'] = { '()', '[]', '{}', '""' },
+    local presets = {
+      ['default'] = { '()', '[]', '{}', "''", '""' },
       ['markdown'] = { '()', '[]', '{}', '""', '$$' },
       ['tex'] = { '()', '[]', '{}', "`'", '$$' },
+      ['haskell'] = { '()', '[]', '{}', '""' },
     }
-    autopair(brackets[opts.match] or brackets['default'])
+    for _, x in ipairs(vim.g.brackets) do
+      vim.keymap.del('i', x:sub(1, 1))
+    end
+    vim.g.brackets = presets[opts.match] or presets['default']
+    for _, x in ipairs(vim.g.brackets) do
+      vim.keymap.set('i', x:sub(1, 1), x .. '<left>')
+    end
   end
 })
+
+local bracket_keymap = function (key, out)
+  vim.keymap.set('i', key, function ()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    local line = vim.api.nvim_get_current_line()
+    for _, x in ipairs(vim.g.brackets) do
+      if x == line:sub(col, col+1) then
+        return out
+      end
+    end
+    return key
+  end, { expr = true })
+end
+
+bracket_keymap('<bs>', '<right><bs><bs>')
+bracket_keymap('<cr>', '<cr><esc>ko')
 
 -- Diagnostics
 local icons = {
