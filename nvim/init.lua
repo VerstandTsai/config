@@ -211,7 +211,11 @@ require('nvim-tree').setup()
 require('mason-lspconfig').setup()
 
 require('blink.cmp').setup({
-  keymap = { preset = 'enter' },
+  completion = {
+    list = { selection = { auto_insert = false } },
+    ghost_text = { enabled = true },
+  },
+  keymap = { ['<right>'] = { 'accept', 'fallback' } },
   signature = { enabled = true },
 })
 
